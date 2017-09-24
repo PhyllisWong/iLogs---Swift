@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XY7-EB-Qkh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Tdu-Ou-ogU">
+            <objects>
+                <viewController id="XY7-EB-Qkh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7iX-bx-3tQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="BUy-EH-zDw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="x8z-ZQ-hJX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVi-pW-92x">
+                                <rect key="frame" x="169" y="318" width="36" height="30"/>
+                                <state key="normal" title="Diary"/>
+                                <connections>
+                                    <segue destination="N4O-IR-PwQ" kind="showDetail" identifier="show diary" id="f4K-rj-7tv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QVi-pW-92x" firstAttribute="centerY" secondItem="x8z-ZQ-hJX" secondAttribute="centerY" id="faw-Ne-Cmo"/>
+                            <constraint firstItem="QVi-pW-92x" firstAttribute="centerX" secondItem="x8z-ZQ-hJX" secondAttribute="centerX" id="pmW-JW-Bgq"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IRz-7t-FuH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1390" y="-75"/>
+        </scene>
+        <!--Diary-->
+        <scene sceneID="TtZ-yE-9ZV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Diary" id="N4O-IR-PwQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e8G-c6-KqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-410.39999999999998" y="-75.112443778110944"/>
+        </scene>
+    </scenes>
+</document>
