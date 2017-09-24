@@ -17,7 +17,7 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         let diary = fetchedResultsController.diary(at: indexPath)
-        cell.textLabel!.text = diary.name!
+        cell.textLabel!.text = diary.title!
         
         return cell
     }
@@ -26,7 +26,7 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
     
     private func updateUI() {
         let fetch: NSFetchRequest<Diary> = Diary.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetch.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
             fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
             managedObjectContext: AppDelegate.diaryViewContext,
@@ -55,7 +55,7 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
     // MARK: - IBACTIONS
     
     @IBAction func pressDiaries(_ sender: UIBarButtonItem) {
-        _ = Diary(name: "Untitled Diary", in: AppDelegate.diaryViewContext)
+        _ = Diary(title: "Untitled Diary", in: AppDelegate.diaryViewContext)
         AppDelegate.sharedInstance.diaryController.saveContext()
     }
     
