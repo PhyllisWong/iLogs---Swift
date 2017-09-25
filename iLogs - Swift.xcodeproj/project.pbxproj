@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E963AFE71F789A760008EDEA /* Timers.xcdatamodeld */; };
+		E963AFEC1F789D0D0008EDEA /* TimersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFEB1F789D0D0008EDEA /* TimersController.swift */; };
+		E963AFEE1F789EB80008EDEA /* TimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFED1F789EB80008EDEA /* TimersTableViewController.swift */; };
+		E963AFF01F78A09E0008EDEA /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFEF1F78A09E0008EDEA /* Timer.swift */; };
+		E963AFF21F78A4010008EDEA /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFF11F78A4010008EDEA /* Directory.swift */; };
 		E9AA69961F7756ED007F07FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA69951F7756ED007F07FB /* AppDelegate.swift */; };
 		E9AA699B1F7756ED007F07FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AA69991F7756ED007F07FB /* Main.storyboard */; };
 		E9AA69A01F7756ED007F07FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9AA699F1F7756ED007F07FB /* Assets.xcassets */; };
@@ -19,6 +24,7 @@
 		E9AA6A0E1F77629E007F07FB /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A0D1F77629E007F07FB /* FetchedResultsTableViewController.swift */; };
 		E9AA6A101F776468007F07FB /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A0F1F776468007F07FB /* Diary.swift */; };
 		E9AA6A131F7769CE007F07FB /* Diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */; };
+		E9C9A1C41F78AE1900AE55D8 /* Timers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C9A1C31F78AE1900AE55D8 /* Timers.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E963AFE81F789A760008EDEA /* Timers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timers.xcdatamodel; sourceTree = "<group>"; };
+		E963AFEB1F789D0D0008EDEA /* TimersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimersController.swift; sourceTree = "<group>"; };
+		E963AFED1F789EB80008EDEA /* TimersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimersTableViewController.swift; sourceTree = "<group>"; };
+		E963AFEF1F78A09E0008EDEA /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		E963AFF11F78A4010008EDEA /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
 		E9AA69921F7756ED007F07FB /* iLogs - Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iLogs - Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AA69951F7756ED007F07FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9AA699A1F7756ED007F07FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +68,7 @@
 		E9AA6A0D1F77629E007F07FB /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewController.swift; sourceTree = "<group>"; };
 		E9AA6A0F1F776468007F07FB /* Diary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		E9AA6A121F7769CE007F07FB /* Diary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Diary.xcdatamodel; sourceTree = "<group>"; };
+		E9C9A1C31F78AE1900AE55D8 /* Timers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timers.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +96,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E963AFEA1F789A7D0008EDEA /* Timers */ = {
+			isa = PBXGroup;
+			children = (
+				E963AFEB1F789D0D0008EDEA /* TimersController.swift */,
+				E963AFED1F789EB80008EDEA /* TimersTableViewController.swift */,
+				E9C9A1C31F78AE1900AE55D8 /* Timers.storyboard */,
+				E963AFE71F789A760008EDEA /* Timers.xcdatamodeld */,
+				E963AFF11F78A4010008EDEA /* Directory.swift */,
+				E963AFEF1F78A09E0008EDEA /* Timer.swift */,
+			);
+			name = Timers;
+			sourceTree = "<group>";
+		};
 		E9AA69891F7756ED007F07FB = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +134,7 @@
 			children = (
 				E9AA69C91F77591D007F07FB /* Controllers */,
 				E9AA69CB1F775948007F07FB /* Diary */,
+				E963AFEA1F789A7D0008EDEA /* Timers */,
 				E9AA69991F7756ED007F07FB /* Main.storyboard */,
 				E9AA69CA1F775935007F07FB /* Supporting Files */,
 			);
@@ -158,8 +184,8 @@
 				E9AA6A091F77614B007F07FB /* DiaryController.swift */,
 				E9AA6A0B1F77625D007F07FB /* TodaysDiaryTableViewController.swift */,
 				E9AA69C61F7758F5007F07FB /* Diary.storyboard */,
-				E9AA6A0F1F776468007F07FB /* Diary.swift */,
 				E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */,
+				E9AA6A0F1F776468007F07FB /* Diary.swift */,
 			);
 			name = Diary;
 			sourceTree = "<group>";
@@ -275,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9AA69C81F7758F5007F07FB /* Diary.storyboard in Resources */,
+				E9C9A1C41F78AE1900AE55D8 /* Timers.storyboard in Resources */,
 				E9AA69A31F7756ED007F07FB /* LaunchScreen.storyboard in Resources */,
 				E9AA69A01F7756ED007F07FB /* Assets.xcassets in Resources */,
 				E9AA699B1F7756ED007F07FB /* Main.storyboard in Resources */,
@@ -302,10 +329,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */,
+				E963AFEC1F789D0D0008EDEA /* TimersController.swift in Sources */,
 				E9AA6A0E1F77629E007F07FB /* FetchedResultsTableViewController.swift in Sources */,
+				E963AFF01F78A09E0008EDEA /* Timer.swift in Sources */,
 				E9AA6A0A1F77614B007F07FB /* DiaryController.swift in Sources */,
 				E9AA69961F7756ED007F07FB /* AppDelegate.swift in Sources */,
+				E963AFEE1F789EB80008EDEA /* TimersTableViewController.swift in Sources */,
 				E9AA6A131F7769CE007F07FB /* Diary.xcdatamodeld in Sources */,
+				E963AFF21F78A4010008EDEA /* Directory.swift in Sources */,
 				E9AA6A0C1F77625D007F07FB /* TodaysDiaryTableViewController.swift in Sources */,
 				E9AA6A101F776468007F07FB /* Diary.swift in Sources */,
 			);
@@ -568,6 +600,7 @@
 				E9AA69BF1F7756ED007F07FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9AA69C01F7756ED007F07FB /* Build configuration list for PBXNativeTarget "iLogs - SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -576,6 +609,7 @@
 				E9AA69C21F7756ED007F07FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9AA69C31F7756ED007F07FB /* Build configuration list for PBXNativeTarget "iLogs - SwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -584,10 +618,21 @@
 				E9AA69C51F7756ED007F07FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		E963AFE71F789A760008EDEA /* Timers.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E963AFE81F789A760008EDEA /* Timers.xcdatamodel */,
+			);
+			currentVersion = E963AFE81F789A760008EDEA /* Timers.xcdatamodel */;
+			path = Timers.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

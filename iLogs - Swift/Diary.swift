@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 extension Diary {
-    convenience init(name: String, dateCreated: Date = Date(), `in` context: NSManagedObjectContext) {
+    convenience init(title: String, dateCreated: Date = Date(), `in` context: NSManagedObjectContext) {
         self.init(context: context)
         
-        self.name = name
+        self.title = title
         self.dateCreated = dateCreated as NSDate
     }
 }

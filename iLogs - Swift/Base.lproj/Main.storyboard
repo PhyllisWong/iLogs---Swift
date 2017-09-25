@@ -21,18 +21,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVi-pW-92x">
-                                <rect key="frame" x="169" y="318" width="36" height="30"/>
-                                <state key="normal" title="Diary"/>
-                                <connections>
-                                    <segue destination="N4O-IR-PwQ" kind="showDetail" identifier="show diary" id="f4K-rj-7tv"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v7S-RO-6X8">
+                                <rect key="frame" x="163.5" y="303" width="47" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVi-pW-92x">
+                                        <rect key="frame" x="0.0" y="0.0" width="47" height="30"/>
+                                        <state key="normal" title="Diary"/>
+                                        <connections>
+                                            <segue destination="N4O-IR-PwQ" kind="showDetail" identifier="show diary" id="f4K-rj-7tv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RZ-BQ-7h6">
+                                        <rect key="frame" x="0.0" y="30" width="47" height="30"/>
+                                        <state key="normal" title="Timers"/>
+                                        <connections>
+                                            <segue destination="Nea-pJ-ByL" kind="showDetail" identifier="show timers" id="H3q-Xt-k5D"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QVi-pW-92x" firstAttribute="centerY" secondItem="x8z-ZQ-hJX" secondAttribute="centerY" id="faw-Ne-Cmo"/>
-                            <constraint firstItem="QVi-pW-92x" firstAttribute="centerX" secondItem="x8z-ZQ-hJX" secondAttribute="centerX" id="pmW-JW-Bgq"/>
+                            <constraint firstItem="v7S-RO-6X8" firstAttribute="centerY" secondItem="x8z-ZQ-hJX" secondAttribute="centerY" id="RnG-xD-3vV"/>
+                            <constraint firstItem="v7S-RO-6X8" firstAttribute="centerX" secondItem="x8z-ZQ-hJX" secondAttribute="centerX" id="e30-KH-EDI"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -46,7 +58,15 @@
                 <viewControllerPlaceholder storyboardName="Diary" id="N4O-IR-PwQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8G-c6-KqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-410.39999999999998" y="-75.112443778110944"/>
+            <point key="canvasLocation" x="-419" y="-100"/>
+        </scene>
+        <!--Timers-->
+        <scene sceneID="oxy-MG-QgN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Timers" id="Nea-pJ-ByL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KcU-5S-gEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-411" y="-50"/>
         </scene>
     </scenes>
 </document>

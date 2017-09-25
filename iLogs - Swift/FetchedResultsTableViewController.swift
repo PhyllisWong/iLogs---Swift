@@ -71,7 +71,11 @@ class FetchedResultsTableViewController: UITableViewController, NSFetchedResults
             let row = fetchedResultsController.object(at: indexPath)
             let context = row.managedObjectContext!
             context.delete(row)
-            saveHandler()
+            if saveHandler != nil {
+                saveHandler()
+            } else {
+                assertionFailure("Save handler was not set!")
+            }
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

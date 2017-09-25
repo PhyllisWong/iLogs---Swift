@@ -1,23 +1,25 @@
 //
-//  TodaysDiaryTableViewController.swift
+//  TimersTableViewController.swift
 //  iLogs - Swift
 //
-//  Created by Erick Sanchez on 9/23/17.
+//  Created by Erick Sanchez on 9/24/17.
 //  Copyright © 2017 Erick Sanchez. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class TodaysDiaryTableViewController: FetchedResultsTableViewController {
+class TimersTableViewController: FetchedResultsTableViewController {
+    
+    var currentDirectory: Directory?
     
     // MARK: - RETURN VALUES
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let diary = fetchedResultsController.diary(at: indexPath)
-        cell.textLabel!.text = diary.title!
+        let row = fetchedResultsController.directory(at: indexPath)
+        cell.textLabel!.text = row.timer.title
         
         return cell
     }
@@ -25,11 +27,16 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
     // MARK: - VOID METHODS
     
     private func updateUI() {
-        let fetch: NSFetchRequest<Diary> = Diary.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        let fetch: NSFetchRequest<Directory> = Directory.fetchRequest()
+        if let directory = currentDirectory {
+            fetch.predicate = NSPredicate(format: "parent == %@", directory)
+        } else {
+            fetch.predicate = NSPredicate(format: "parent == NULL")
+        }
+        fetch.sortDescriptors = [NSSortDescriptor(key: "info.title", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
         fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
             fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
-            managedObjectContext: AppDelegate.diaryViewContext,
+            managedObjectContext: AppDelegate.timersViewContext,
             sectionNameKeyPath: nil, cacheName: nil
         )
     }
@@ -46,7 +53,6 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
      }
      }*/
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,9 +60,9 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
     
     // MARK: - IBACTIONS
     
-    @IBAction func pressDiaries(_ sender: UIBarButtonItem) {
-        _ = Diary(title: "Untitled Diary", in: AppDelegate.diaryViewContext)
-        AppDelegate.sharedInstance.diaryController.saveContext()
+    @IBAction func pressAdd(_ sender: UIBarButtonItem) {
+        _ = iLogs___Swift.Timer(title: "Untitled", parent: currentDirectory, in: AppDelegate.timersViewContext)
+        AppDelegate.sharedInstance.timersController.saveContext()
     }
     
     // MARK: - LIFE CYCLE
@@ -64,13 +70,9 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveHandler = AppDelegate.sharedInstance.diaryController.saveContext
+        self.saveHandler = AppDelegate.sharedInstance.timersController.saveContext
         
         updateUI()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 
 }
