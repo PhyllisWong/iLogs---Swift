@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Diaries" representedClassName="Diary" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isArchived" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Entries" inverseName="diary" inverseEntity="Entries" syncable="YES"/>
         <relationship name="stories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Stories" inverseName="diary" inverseEntity="Stories" syncable="YES"/>
@@ -58,7 +59,7 @@
         <relationship name="entry" maxCount="1" deletionRule="Nullify" destinationEntity="Entries" inverseName="weatherConditions" inverseEntity="Entries" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Diaries" positionX="189" positionY="-162" width="128" height="103"/>
+        <element name="Diaries" positionX="189" positionY="-162" width="128" height="120"/>
         <element name="Emotions" positionX="45" positionY="-0" width="128" height="73"/>
         <element name="Entries" positionX="-207" positionY="-9" width="128" height="223"/>
         <element name="EntryOutlines" positionX="196" positionY="63" width="128" height="90"/>
