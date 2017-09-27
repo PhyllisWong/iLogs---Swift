@@ -51,7 +51,7 @@
         <scene sceneID="BVo-Yr-eMH">
             <objects>
                 <tableViewController id="Fhe-Fx-VoU" customClass="DiaryTableViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="omW-tl-kmk">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="omW-tl-kmk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -91,24 +91,24 @@
                                     <outlet property="labelTitle" destination="9FD-cn-1LU" id="MtL-dN-OWd"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="edit" id="pkD-5C-Lyp" customClass="CustomTableViewCell" customModule="iLogs___Swift" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="edit" editingAccessoryType="disclosureIndicator" id="pkD-5C-Lyp" customClass="CustomTableViewCell" customModule="iLogs___Swift" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pkD-5C-Lyp" id="dlB-wJ-b3o">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SSw-fX-ppv">
-                                            <rect key="frame" x="15" y="0.0" width="319" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="352" height="43.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pif-zW-nqp">
-                                                    <rect key="frame" x="0.0" y="11.5" width="270" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="11.5" width="303" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8k6-x6-2l4">
-                                                    <rect key="frame" x="270" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="303" y="6.5" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="switchDidChange:" destination="pkD-5C-Lyp" eventType="valueChanged" id="kq6-DB-iFU"/>
                                                     </connections>

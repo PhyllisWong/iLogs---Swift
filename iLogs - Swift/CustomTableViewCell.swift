@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 protocol CustomTableViewCellDelegate {
-    @objc optional func customCell(_ cell: CustomTableViewCell, switchDidChange: UISwitch)
+    @objc optional func customCell(_ cell: CustomTableViewCell, switchDidChange switcher: UISwitch)
 }
 
 class CustomTableViewCell: UITableViewCell {

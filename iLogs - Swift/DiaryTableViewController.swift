@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DiaryTableViewController: FetchedResultsTableViewController {
+class DiaryTableViewController: FetchedResultsTableViewController, CustomTableViewCellDelegate {
     
     // MARK: - RETURN VALUES
     
@@ -20,6 +20,7 @@ class DiaryTableViewController: FetchedResultsTableViewController {
             
             cell.labelTitle.text = diary.title
             cell.switcher.isOn = diary.isArchived.inverse
+            cell.delegate = self
             
             return cell
         } else {
@@ -36,6 +37,9 @@ class DiaryTableViewController: FetchedResultsTableViewController {
     private func updateUI() {
         let fetch: NSFetchRequest<Diary> = Diary.fetchRequest()
         fetch.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
+        if tableView.isEditing != true {
+            fetch.predicate = NSPredicate(format: "isArchived == FALSE")
+        }
         fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
             fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
             managedObjectContext: AppDelegate.diaryViewContext,
@@ -43,29 +47,47 @@ class DiaryTableViewController: FetchedResultsTableViewController {
         )
     }
     
-    /*
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     if let identifier = segue.identifier {
-     switch identifier {
-     case <#pattern#>:
-     <#code#>
-     default:
-     break
-     }
-     }
-     }*/
-    
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
         buttonAdd.isEnabled = editing.inverse
         buttonDone.isEnabled = editing.inverse
-        tableView.reloadData()
+        updateUI()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Table View Delegate
+    // TODO Update arraganging Diaryies
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.isEditing {
+            let diary = fetchedResultsController.diary(at: indexPath)
+            let alertRename = UIAlertController(title: "Rename Diary", message: "enter a new title", preferredStyle: .alert)
+            alertRename.addTextField(configurationHandler: { (textField) in
+                textField.setStyleToParagraph(withPlaceholderText: "title", withInitalText: diary.title)
+            })
+            alertRename.addActions(actions: UIAlertActionInfo(title: "Rename", handler: { (action) in
+                diary.title = alertRename.inputField.text
+                AppDelegate.sharedInstance.diaryController.saveContext()
+            }))
+            present(alertRename, animated: true)
+        } else {
+            //TODO Update visiability on which diary is showing in the filter
+        }
+    }
+    
+    // MARK: Custom Table View Cell Delegate
+    
+    func customCell(_ cell: CustomTableViewCell, switchDidChange switcher: UISwitch) {
+        let indexPath = tableView.indexPath(for: cell)!
+        let diary = fetchedResultsController.diary(at: indexPath)
+        diary.isArchived = switcher.isOn.inverse
+        AppDelegate.sharedInstance.diaryController.saveContext()
+        
     }
     
     // MARK: - IBACTIONS
@@ -92,6 +114,8 @@ class DiaryTableViewController: FetchedResultsTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.saveHandler = AppDelegate.sharedInstance.diaryController.saveContext
         
         navigationItem.rightBarButtonItem = editButtonItem
         

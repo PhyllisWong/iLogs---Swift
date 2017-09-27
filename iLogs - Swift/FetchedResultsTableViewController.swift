@@ -28,11 +28,11 @@ class FetchedResultsTableViewController: UITableViewController, NSFetchedResults
     var saveHandler: (() -> Void)!
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return fetchedResultsController?.sections?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

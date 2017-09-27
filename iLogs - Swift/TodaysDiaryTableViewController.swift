@@ -25,13 +25,6 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
     // MARK: - VOID METHODS
     
     private func updateUI() {
-        let fetch: NSFetchRequest<Diary> = Diary.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
-            fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
-            managedObjectContext: AppDelegate.diaryViewContext,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
     }
     
     /*
