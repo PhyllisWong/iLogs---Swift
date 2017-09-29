@@ -26,6 +26,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="NW4-n8-Qay" kind="show" identifier="show entry detail" id="3fX-bC-CmB"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -36,7 +39,6 @@
                     <navigationItem key="navigationItem" title="Today's Journal" id="FGd-L6-A2h">
                         <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="gNv-Mo-srg">
                             <connections>
-                                <action selector="pressDiaries:" destination="G0k-ik-Zp8" id="bCW-IB-sQb"/>
                                 <segue destination="4aI-wl-Aqp" kind="showDetail" identifier="show diary" id="atj-Bl-ed0"/>
                             </connections>
                         </barButtonItem>
@@ -51,11 +53,11 @@
             </objects>
             <point key="canvasLocation" x="1478" y="-397"/>
         </scene>
-        <!--Title-->
+        <!--Entry-->
         <scene sceneID="T2Z-ra-4s9">
             <objects>
-                <tableViewController id="lah-j9-p7H" customClass="EntryViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wza-2y-SHp">
+                <tableViewController title="Entry" id="lah-j9-p7H" customClass="EntryViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wza-2y-SHp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -396,7 +398,11 @@
                                 <action selector="pressDismiss:" destination="lah-j9-p7H" id="boZ-OO-bIh"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Tf9-3E-Ncg"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Tf9-3E-Ncg">
+                            <connections>
+                                <action selector="pressSave:" destination="lah-j9-p7H" id="xLH-UQ-g3K"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonBody" destination="QBU-Be-bHz" id="RKn-hN-eRo"/>
@@ -417,7 +423,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blD-mV-AUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3293.5999999999999" y="-133.5832083958021"/>
+            <point key="canvasLocation" x="4246" y="-123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8ZV-FU-wfj">
@@ -433,7 +439,32 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hcr-5C-KjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2345" y="-133"/>
+            <point key="canvasLocation" x="3297" y="-123"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="GCY-be-Fgw">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="NW4-n8-Qay" customClass="EntryDetailViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DZm-dR-bVd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yke-k7-zRJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v7A-xX-iTf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="6jp-nd-pi9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Q2h-yt-pyt">
+                            <connections>
+                                <segue destination="DUH-Kr-uww" kind="showDetail" identifier="show entry" id="BCx-pJ-vLt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3S7-9d-Xop" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2345" y="193"/>
         </scene>
         <!--Diaries-->
         <scene sceneID="BVo-Yr-eMH">
@@ -706,4 +737,7 @@
             <point key="canvasLocation" x="525.60000000000002" y="-397.15142428785612"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BCx-pJ-vLt"/>
+    </inferredMetricsTieBreakers>
 </document>

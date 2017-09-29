@@ -8,11 +8,82 @@
 
 import UIKit
 
-class EntryViewController: UITableViewController {
+class EntryViewController: UITableViewController, UITextFieldDelegate {
+    
+    var entry: Entry!
+    
+    private var crud: CRUD = .Create
+    
+    private struct Table {
+        static var diaryIndexPath = IndexPath(row: 1, section: 0)
+    }
     
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
+    
+    private func updateUI() {
+        if entry == nil {
+            entry = Entry(diary: AppDelegate.sharedInstance.diaryController.defaultDiary, in: AppDelegate.diaryViewContext)
+            crud = .Create
+        } else {
+            crud = .Update
+        }
+        textFieldSubject.text = entry.subject
+        labelDiary.text = entry.diary!.title
+    }
+    
+    private func dismissFirstResponder() {
+        if textFieldSubject.isFirstResponder {
+            textFieldSubject.resignFirstResponder()
+        }
+    }
+    
+    private func setUpObservers() {
+        entry.addObserver(self, forKeyPath: "diary", options: .new, context: nil)
+    }
+    
+    private func removeObservers() {
+        entry.removeObserver(self, forKeyPath: "diary")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        switch keyPath! {
+        case "diary":
+            labelDiary.text = entry.diary!.title
+        default:
+            break
+        }
+    }
+    
+    // MARK: Text Field Delegate
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case textFieldSubject:
+            entry.subject = textField.text
+        default: break
+        }
+    }
+    
+    // MARK: Table View Delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath {
+        case Table.diaryIndexPath:
+            let alertDiaries = UIAlertController(title: nil, message: "select a diary", preferredStyle: .actionSheet)
+            let diaries = Diary.fetchDiaries()
+            for diary in diaries {
+                alertDiaries.addAction(UIAlertAction(title: diary.title, style: .default, handler: { [weak self] (action) in
+                    self!.entry.diary = diary
+                }))
+            }
+            alertDiaries.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            tableView.deselectRow(at: Table.diaryIndexPath, animated: true)
+            self.present(alertDiaries, animated: true)
+        default: break
+        }
+    }
     
     /*
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -25,7 +96,6 @@ class EntryViewController: UITableViewController {
      }
      }
      }*/
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -62,8 +132,17 @@ class EntryViewController: UITableViewController {
     }
     @IBOutlet weak var textViewBody: UITextView!
     
+    @IBAction func pressSave(_ sender: Any) {
+        removeObservers()
+        dismissFirstResponder()
+        AppDelegate.sharedInstance.diaryController.saveContext()
+        presentingViewController?.dismiss(animated: true)
+    }
     
     @IBAction func pressDismiss(_ sender: Any) {
+        removeObservers()
+        dismissFirstResponder()
+        AppDelegate.diaryViewContext.rollback()
         presentingViewController?.dismiss(animated: true)
     }
     
@@ -73,5 +152,24 @@ class EntryViewController: UITableViewController {
         super.viewDidLoad()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateUI()
+        
+        setUpObservers()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if crud == .Create {
+            textFieldSubject.becomeFirstResponder()
+        }
+    }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 }

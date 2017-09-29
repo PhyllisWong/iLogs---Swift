@@ -18,7 +18,7 @@
         <attribute name="duration" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isBookedMarked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="diary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Diaries" inverseName="entries" inverseEntity="Diaries" syncable="YES"/>
+        <relationship name="diary" maxCount="1" deletionRule="Nullify" destinationEntity="Diaries" inverseName="entries" inverseEntity="Diaries" syncable="YES"/>
         <relationship name="emotions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Emotions" inverseName="entry" inverseEntity="Emotions" syncable="YES"/>
         <relationship name="highlight" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Highlights" inverseName="entry" inverseEntity="Highlights" syncable="YES"/>
         <relationship name="listOfFavorites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Favorites" inverseName="entries" inverseEntity="Favorites" syncable="YES"/>
@@ -61,7 +61,7 @@
     <elements>
         <element name="Diaries" positionX="189" positionY="-162" width="128" height="120"/>
         <element name="Emotions" positionX="45" positionY="-0" width="128" height="73"/>
-        <element name="Entries" positionX="-207" positionY="-9" width="128" height="223"/>
+        <element name="Entries" positionX="-207" positionY="-9" width="128" height="225"/>
         <element name="EntryOutlines" positionX="196" positionY="63" width="128" height="90"/>
         <element name="Favorites" positionX="-20" positionY="171" width="128" height="88"/>
         <element name="Highlights" positionX="133" positionY="171" width="128" height="105"/>

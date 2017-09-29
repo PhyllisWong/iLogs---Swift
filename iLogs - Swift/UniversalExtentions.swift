@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+enum CRUD {
+    case Create
+    case Read
+    case Update
+    case Delete
+}
+
 extension UITextField {
     open func setStyleToParagraph(withPlaceholderText placeholder: String? = "", withInitalText text: String? = "") {
         self.autocorrectionType = .default
