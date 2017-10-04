@@ -73,6 +73,8 @@ class TimersTableViewController: FetchedResultsTableViewController {
         self.saveHandler = AppDelegate.sharedInstance.timersController.saveContext
         
         updateUI()
+        
+        self.navigationItem.rightBarButtonItem = editButtonItem
     }
 
 }

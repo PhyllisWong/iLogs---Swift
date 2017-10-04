@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EntryViewController: UITableViewController, UITextFieldDelegate {
+class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTableViewDelegate {
     
     var entry: Entry!
     
@@ -17,6 +17,8 @@ class EntryViewController: UITableViewController, UITextFieldDelegate {
     private struct Table {
         static var diaryIndexPath = IndexPath(row: 1, section: 0)
     }
+    
+    private var viewDidAppear = false
     
     // MARK: - RETURN VALUES
     
@@ -31,6 +33,7 @@ class EntryViewController: UITableViewController, UITextFieldDelegate {
         }
         textFieldSubject.text = entry.subject
         labelDiary.text = entry.diary!.title
+        textViewBody.text = entry.body
     }
     
     private func dismissFirstResponder() {
@@ -41,18 +44,34 @@ class EntryViewController: UITableViewController, UITextFieldDelegate {
     
     private func setUpObservers() {
         entry.addObserver(self, forKeyPath: "diary", options: .new, context: nil)
+        entry.addObserver(self, forKeyPath: "body", options: .new, context: nil)
     }
     
     private func removeObservers() {
         entry.removeObserver(self, forKeyPath: "diary")
+        entry.removeObserver(self, forKeyPath: "body")
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         switch keyPath! {
         case "diary":
             labelDiary.text = entry.diary!.title
+        case "body":
+            textViewBody.text = entry.body
         default:
             break
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show body":
+                let vc = segue.destination as! ModularTableViewController
+                vc.delegate = self
+                vc.value = entry.body
+            default: break
+            }
         }
     }
     
@@ -96,6 +115,15 @@ class EntryViewController: UITableViewController, UITextFieldDelegate {
      }
      }
      }*/
+    
+    // MARK: Modular Table View Delegate
+    
+    func modular(_ module: ModularTableViewController, didFinishWithObject object: Any?) {
+        switch module.moduleType {
+        case .Body:
+            entry.body = object as! String?
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -151,22 +179,29 @@ class EntryViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateUI()
+        
+        setUpObservers()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        updateUI()
-        
-        setUpObservers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if crud == .Create {
+        if viewDidAppear != true && crud == .Create {
             textFieldSubject.becomeFirstResponder()
+            viewDidAppear = true
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        dismissFirstResponder()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
