@@ -13,6 +13,10 @@ class DiaryTableViewController: FetchedResultsTableViewController, CustomTableVi
     
     // MARK: - RETURN VALUES
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return tableView.isEditing
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let diary = fetchedResultsController.diary(at: indexPath)
         if tableView.isEditing {
