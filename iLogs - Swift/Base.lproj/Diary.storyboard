@@ -75,7 +75,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="lah-j9-p7H" id="Ia2-7p-237"/>
                                                     </connections>
@@ -106,7 +106,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TEI-wy-Jo6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="TEI-wy-Jo6">
                                         <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TEI-wy-Jo6" id="Nxe-4I-J3i">
@@ -116,42 +116,51 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZB7-t5-y3T">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="39.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceg-0b-R8e">
-                                                            <rect key="frame" x="0.0" y="9.5" width="117" height="30"/>
-                                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                            <state key="normal" title="Button"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceg-0b-R8e">
+                                                            <rect key="frame" x="0.0" y="13.5" width="117" height="26"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="lf8-fd-jAQ"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <state key="normal" title="empty" backgroundImage="misc_button-disabled">
+                                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="pressEmotions:" destination="lah-j9-p7H" eventType="touchUpInside" id="nXi-f7-InP"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lbo-xd-Lv1">
-                                                            <rect key="frame" x="135" y="9.5" width="117" height="30"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lbo-xd-Lv1">
+                                                            <rect key="frame" x="135" y="13.5" width="117" height="26"/>
                                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                            <state key="normal" title="Button"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="sUe-iW-aPT"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <state key="normal" title="empty" backgroundImage="misc_button-disabled">
+                                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
                                                             <connections>
                                                                 <action selector="pressWeather:" destination="lah-j9-p7H" eventType="touchUpInside" id="o98-Rj-Tug"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb0-s2-Rop">
+                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb0-s2-Rop">
                                                             <rect key="frame" x="270" y="10.5" width="32" height="29"/>
-                                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="32" id="qnf-pt-Xnw"/>
                                                                 <constraint firstAttribute="height" constant="29" id="t6A-X0-c1F"/>
                                                             </constraints>
-                                                            <state key="normal" title="hlt"/>
+                                                            <state key="normal" image="misc_highlighter-disabled"/>
                                                             <connections>
                                                                 <action selector="pressHighlight:" destination="lah-j9-p7H" eventType="touchUpInside" id="xYD-2f-XHa"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ay-1h-4qS">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ay-1h-4qS">
                                                             <rect key="frame" x="320" y="14.5" width="25" height="25"/>
-                                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="YKX-fC-EBA"/>
                                                                 <constraint firstAttribute="width" constant="25" id="cgH-33-YqA"/>
                                                             </constraints>
-                                                            <state key="normal" title="bk"/>
+                                                            <state key="normal" image="misc_bookmark-disabled"/>
                                                             <connections>
                                                                 <action selector="pressBookmark:" destination="lah-j9-p7H" eventType="touchUpInside" id="SP4-RL-3dv"/>
                                                             </connections>
@@ -161,17 +170,15 @@
                                                         <constraint firstItem="Ceg-0b-R8e" firstAttribute="width" secondItem="lbo-xd-Lv1" secondAttribute="width" id="OoV-ik-Nog"/>
                                                     </constraints>
                                                 </stackView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3I0-IP-zwt">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_emotion-disabled" translatesAutoresizingMaskIntoConstraints="NO" id="3I0-IP-zwt">
                                                     <rect key="frame" x="114" y="0.0" width="36" height="36"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="UrY-Zr-9hY"/>
                                                         <constraint firstAttribute="width" constant="36" id="l99-6t-jkX"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ae3-mT-d3l">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_weather-disabled" translatesAutoresizingMaskIntoConstraints="NO" id="Ae3-mT-d3l">
                                                     <rect key="frame" x="249" y="0.0" width="36" height="36"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="36" id="ZgZ-a3-sV3"/>
                                                         <constraint firstAttribute="height" constant="36" id="x67-HK-pQq"/>
@@ -395,6 +402,17 @@
                             <outlet property="delegate" destination="lah-j9-p7H" id="olj-KJ-5ez"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="C6p-ju-alJ"/>
+                        <barButtonItem title="Date" image="misc_toolbarDate" id="63v-WE-Wq0"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="CMs-hv-2yl"/>
+                        <barButtonItem title="Start Time" image="misc_toolbarStartTime" id="XXD-6J-v5G"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Acj-YP-5pE"/>
+                        <barButtonItem title="Media" image="misc_toolbarMedia" id="Os5-zA-ndc"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="aG0-2m-qQF"/>
+                        <barButtonItem title="Audio" image="misc_toolbarVoiceMemo" id="BdA-tJ-bVQ"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="yqH-nv-maD"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Title" id="mdo-x8-HiW">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sC6-lt-Wnd">
                             <connections>
@@ -407,6 +425,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="buttonBody" destination="QBU-Be-bHz" id="RKn-hN-eRo"/>
                         <outlet property="buttonBookmark" destination="8ay-1h-4qS" id="eD6-7n-E2p"/>
@@ -497,11 +516,15 @@
         <!--Navigation Controller-->
         <scene sceneID="8ZV-FU-wfj">
             <objects>
-                <navigationController id="DUH-Kr-uww" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="DUH-Kr-uww" sceneMemberID="viewController">
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZAx-xA-T5N">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T5v-K7-BdU">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="lah-j9-p7H" kind="relationship" relationship="rootViewController" id="8vA-VA-WrK"/>
                     </connections>
@@ -521,7 +544,28 @@
                     <view key="view" contentMode="scaleToFill" id="v7A-xX-iTf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeH-C2-d9m">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Audio" image="misc_toolbarVoiceMemo" id="58d-wJ-jOq"/>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="2Ws-Ah-G8Q"/>
+                                    <barButtonItem title="Date" image="misc_toolbarDate" id="pBi-zF-3yn"/>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="ymC-Is-SkV"/>
+                                    <barButtonItem title="Start Time" image="misc_toolbarStartTime" id="VsF-zL-vsU"/>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="olR-xD-588"/>
+                                    <barButtonItem title="Media" image="misc_toolbarMedia" id="HjT-nB-2Pv"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="EKw-cD-F8m"/>
+                                    <barButtonItem title="Add To" image="misc_toolbarAddTo" id="qcJ-qo-dBU"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MeH-C2-d9m" secondAttribute="trailing" id="cKO-WO-xqe"/>
+                            <constraint firstItem="MeH-C2-d9m" firstAttribute="leading" secondItem="v7A-xX-iTf" secondAttribute="leading" id="s1A-62-pYe"/>
+                            <constraint firstItem="Yke-k7-zRJ" firstAttribute="top" secondItem="MeH-C2-d9m" secondAttribute="bottom" id="tKa-ud-zST"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="6jp-nd-pi9">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Q2h-yt-pyt">
@@ -806,7 +850,19 @@
             <point key="canvasLocation" x="525.60000000000002" y="-397.15142428785612"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="misc_bookmark-disabled" width="25" height="25"/>
+        <image name="misc_button-disabled" width="7" height="7"/>
+        <image name="misc_emotion-disabled" width="36" height="36"/>
+        <image name="misc_highlighter-disabled" width="32" height="29"/>
+        <image name="misc_toolbarAddTo" width="25" height="25"/>
+        <image name="misc_toolbarDate" width="25" height="25"/>
+        <image name="misc_toolbarMedia" width="25" height="25"/>
+        <image name="misc_toolbarStartTime" width="25" height="25"/>
+        <image name="misc_toolbarVoiceMemo" width="25" height="25"/>
+        <image name="misc_weather-disabled" width="36" height="36"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1kV-5m-43X"/>
+        <segue reference="BCx-pJ-vLt"/>
     </inferredMetricsTieBreakers>
 </document>

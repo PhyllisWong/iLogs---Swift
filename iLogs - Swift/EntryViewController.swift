@@ -34,22 +34,35 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
         textFieldSubject.text = entry.subject
         labelDiary.text = entry.diary!.title
         textViewBody.text = entry.body
+        if entry.isBookMarked {
+            buttonBookmark.setImage(#imageLiteral(resourceName: "misc_bookmark-enabled"), for: .normal)
+        } else {
+            buttonBookmark.setImage(#imageLiteral(resourceName: "misc_bookmark-disabled"), for: .normal)
+        }
     }
     
     private func dismissFirstResponder() {
         if textFieldSubject.isFirstResponder {
             textFieldSubject.resignFirstResponder()
         }
+        if textFieldStories.isFirstResponder {
+            textFieldStories.resignFirstResponder()
+        }
+        if textFieldTags.isFirstResponder {
+            textFieldTags.resignFirstResponder()
+        }
     }
     
     private func setUpObservers() {
         entry.addObserver(self, forKeyPath: "diary", options: .new, context: nil)
         entry.addObserver(self, forKeyPath: "body", options: .new, context: nil)
+        entry.addObserver(self, forKeyPath: "isBookMarked", options: .new, context: nil)
     }
     
     private func removeObservers() {
         entry.removeObserver(self, forKeyPath: "diary")
         entry.removeObserver(self, forKeyPath: "body")
+        entry.removeObserver(self, forKeyPath: "isBookMarked")
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -58,6 +71,12 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
             labelDiary.text = entry.diary!.title
         case "body":
             textViewBody.text = entry.body
+        case "isBookMarked":
+            if entry.isBookMarked {
+                buttonBookmark.setImage(#imageLiteral(resourceName: "misc_bookmark-enabled"), for: .normal)
+            } else {
+                buttonBookmark.setImage(#imageLiteral(resourceName: "misc_bookmark-disabled"), for: .normal)
+            }
         default:
             break
         }
@@ -148,10 +167,19 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
     }
     @IBOutlet weak var buttonBookmark: UIButton!
     @IBAction func pressBookmark(_ sender: Any) {
+        entry.isBookMarked.invert()
     }
     @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var textFieldStories: UITextField!
-    @IBOutlet weak var textFieldTags: UITextField!
+    @IBOutlet weak var textFieldStories: UITextField! {
+        didSet {
+            textFieldStories.inputView = UIView()
+        }
+    }
+    @IBOutlet weak var textFieldTags: UITextField! {
+        didSet {
+            textFieldTags.inputView = UIView()
+        }
+    }
     @IBOutlet weak var buttonBody: UIButton!
     @IBAction func pressBody(_ sender: UIButton) {
     }
