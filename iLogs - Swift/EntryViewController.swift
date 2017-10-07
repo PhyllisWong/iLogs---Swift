@@ -89,6 +89,9 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
                 let vc = segue.destination as! ModularTableViewController
                 vc.delegate = self
                 vc.value = entry.body
+            case "show weather":
+                let vc = (segue.destination as! UINavigationController).topViewController! as! ModularCollectionController
+                vc.module = .WeatherConditions
             default: break
             }
         }

@@ -79,9 +79,6 @@ class DiaryController {
             UserDefaults.standard.synchronize()
         }
     }
-    
-    struct ImageResources {
-    }
 }
 
 extension AppDelegate {

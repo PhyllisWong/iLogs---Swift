@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E938CC8B1F8857F800408742 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938CC8A1F8857F800408742 /* CustomCollectionViewCell.swift */; };
+		E938CC8D1F8858F300408742 /* ModularCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938CC8C1F8858F300408742 /* ModularCollectionController.swift */; };
 		E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E963AFE71F789A760008EDEA /* Timers.xcdatamodeld */; };
 		E963AFEC1F789D0D0008EDEA /* TimersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFEB1F789D0D0008EDEA /* TimersController.swift */; };
 		E963AFEE1F789EB80008EDEA /* TimersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFED1F789EB80008EDEA /* TimersTableViewController.swift */; };
@@ -32,6 +34,7 @@
 		E9C9A1C41F78AE1900AE55D8 /* Timers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C9A1C31F78AE1900AE55D8 /* Timers.storyboard */; };
 		E9C9A1C61F7ADE0500AE55D8 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9A1C51F7ADE0500AE55D8 /* CustomTableViewCell.swift */; };
 		E9C9A1CB1F7AE2B000AE55D8 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9A1CA1F7AE2B000AE55D8 /* DiaryTableViewController.swift */; };
+		E9F2DF651F88B62400A4B7E4 /* Entry+Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F2DF641F88B62400A4B7E4 /* Entry+Meta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E938CC8A1F8857F800408742 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		E938CC8C1F8858F300408742 /* ModularCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularCollectionController.swift; sourceTree = "<group>"; };
 		E963AFE81F789A760008EDEA /* Timers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timers.xcdatamodel; sourceTree = "<group>"; };
 		E963AFEB1F789D0D0008EDEA /* TimersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimersController.swift; sourceTree = "<group>"; };
 		E963AFED1F789EB80008EDEA /* TimersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimersTableViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 		E9C9A1C31F78AE1900AE55D8 /* Timers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timers.storyboard; sourceTree = "<group>"; };
 		E9C9A1C51F7ADE0500AE55D8 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		E9C9A1CA1F7AE2B000AE55D8 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
+		E9F2DF641F88B62400A4B7E4 /* Entry+Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+Meta.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C9A1C51F7ADE0500AE55D8 /* CustomTableViewCell.swift */,
+				E938CC8A1F8857F800408742 /* CustomCollectionViewCell.swift */,
 				E98E9ED91F84356800B684D9 /* ModularTableViewController.swift */,
 			);
 			name = UICustom;
@@ -212,6 +219,7 @@
 				E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */,
 				E9BEB72D1F7DEAFF00C0FDA4 /* Diary.swift */,
 				E9BEB7271F7DCD8200C0FDA4 /* Entry.swift */,
+				E9F2DF641F88B62400A4B7E4 /* Entry+Meta.swift */,
 			);
 			name = Diary;
 			sourceTree = "<group>";
@@ -222,6 +230,7 @@
 				E9AA6A0B1F77625D007F07FB /* TodaysDiaryTableViewController.swift */,
 				E9C9A1CA1F7AE2B000AE55D8 /* DiaryTableViewController.swift */,
 				E9BEB7251F7B69F100C0FDA4 /* EntryViewController.swift */,
+				E938CC8C1F8858F300408742 /* ModularCollectionController.swift */,
 				E9BEB7291F7DD78E00C0FDA4 /* EntryDetailViewController.swift */,
 			);
 			name = "Today's";
@@ -370,9 +379,12 @@
 				E9C9A1CB1F7AE2B000AE55D8 /* DiaryTableViewController.swift in Sources */,
 				E963AFEC1F789D0D0008EDEA /* TimersController.swift in Sources */,
 				E9BEB72A1F7DD78E00C0FDA4 /* EntryDetailViewController.swift in Sources */,
+				E9F2DF651F88B62400A4B7E4 /* Entry+Meta.swift in Sources */,
 				E963AFF01F78A09E0008EDEA /* Timer.swift in Sources */,
 				E9AA6A0A1F77614B007F07FB /* DiaryController.swift in Sources */,
+				E938CC8B1F8857F800408742 /* CustomCollectionViewCell.swift in Sources */,
 				E9AA69961F7756ED007F07FB /* AppDelegate.swift in Sources */,
+				E938CC8D1F8858F300408742 /* ModularCollectionController.swift in Sources */,
 				E9C9A1C61F7ADE0500AE55D8 /* CustomTableViewCell.swift in Sources */,
 				E9BEB7281F7DCD8200C0FDA4 /* Entry.swift in Sources */,
 				E9BEB72E1F7DEAFF00C0FDA4 /* Diary.swift in Sources */,

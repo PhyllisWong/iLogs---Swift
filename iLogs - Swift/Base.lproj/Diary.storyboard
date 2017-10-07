@@ -141,6 +141,7 @@
                                                             </state>
                                                             <connections>
                                                                 <action selector="pressWeather:" destination="lah-j9-p7H" eventType="touchUpInside" id="o98-Rj-Tug"/>
+                                                                <segue destination="WTu-lJ-tNZ" kind="showDetail" identifier="show weather" id="MNA-X6-gmX"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb0-s2-Rop">
@@ -514,6 +515,101 @@
             <point key="canvasLocation" x="5034" y="-124"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="uat-UH-S1E">
+            <objects>
+                <navigationController id="WTu-lJ-tNZ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2G4-sB-faO">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VIS-h1-kKW" kind="relationship" relationship="rootViewController" id="Jx7-7Q-tqE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VfY-iE-86j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5033" y="591"/>
+        </scene>
+        <!--Modular Collection Controller-->
+        <scene sceneID="uUh-SP-CnG">
+            <objects>
+                <viewController id="VIS-h1-kKW" customClass="ModularCollectionController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4WO-Bb-zP9"/>
+                        <viewControllerLayoutGuide type="bottom" id="wOy-Tw-ldq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zdb-2U-cDd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OQl-B0-nCS">
+                                <rect key="frame" x="20" y="64" width="335" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hz6-0L-XsO">
+                                    <size key="itemSize" width="72" height="72"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="2WK-99-tL6" customClass="CustomCollectionViewCell" customModule="iLogs___Swift" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="misc_weatherClear" translatesAutoresizingMaskIntoConstraints="NO" id="PUM-BH-VPA">
+                                                    <rect key="frame" x="18" y="8" width="36" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="Q2S-C2-qdg"/>
+                                                        <constraint firstAttribute="width" constant="36" id="Zja-jx-fQi"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lR4-7K-zE4">
+                                                    <rect key="frame" x="0.0" y="44" width="72" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="PUM-BH-VPA" firstAttribute="top" secondItem="2WK-99-tL6" secondAttribute="top" constant="8" id="7JQ-fT-AXl"/>
+                                            <constraint firstItem="lR4-7K-zE4" firstAttribute="leading" secondItem="2WK-99-tL6" secondAttribute="leading" id="DzY-GQ-TtZ"/>
+                                            <constraint firstItem="PUM-BH-VPA" firstAttribute="centerX" secondItem="2WK-99-tL6" secondAttribute="centerX" id="kgL-Xn-7Pm"/>
+                                            <constraint firstAttribute="trailing" secondItem="lR4-7K-zE4" secondAttribute="trailing" id="mLz-sG-mpf"/>
+                                            <constraint firstItem="lR4-7K-zE4" firstAttribute="top" secondItem="PUM-BH-VPA" secondAttribute="bottom" id="pa1-iS-VTx"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="PUM-BH-VPA" id="meY-0F-PJF"/>
+                                            <outlet property="labelTitle" destination="lR4-7K-zE4" id="DCs-Dy-6Xo"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="VIS-h1-kKW" id="KEX-2O-nbO"/>
+                                    <outlet property="delegate" destination="VIS-h1-kKW" id="HtF-fm-BbL"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OQl-B0-nCS" secondAttribute="trailing" constant="20" symbolic="YES" id="EKz-eI-njH"/>
+                            <constraint firstItem="OQl-B0-nCS" firstAttribute="top" secondItem="4WO-Bb-zP9" secondAttribute="bottom" id="Sar-Je-67Q"/>
+                            <constraint firstItem="OQl-B0-nCS" firstAttribute="leading" secondItem="Zdb-2U-cDd" secondAttribute="leading" constant="20" symbolic="YES" id="gEK-Dp-YJH"/>
+                            <constraint firstItem="wOy-Tw-ldq" firstAttribute="top" secondItem="OQl-B0-nCS" secondAttribute="bottom" id="kWb-3W-0u3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="N9l-BT-LYP"/>
+                    <connections>
+                        <outlet property="collectionView" destination="OQl-B0-nCS" id="LSN-Nm-4CB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4wm-s9-ZoO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5829.6000000000004" y="590.55472263868069"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="8ZV-FU-wfj">
             <objects>
                 <navigationController toolbarHidden="NO" id="DUH-Kr-uww" sceneMemberID="viewController">
@@ -861,6 +957,7 @@
         <image name="misc_toolbarStartTime" width="25" height="25"/>
         <image name="misc_toolbarVoiceMemo" width="25" height="25"/>
         <image name="misc_weather-disabled" width="36" height="36"/>
+        <image name="misc_weatherClear" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BCx-pJ-vLt"/>
