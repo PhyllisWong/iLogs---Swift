@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTableViewDelegate {
     
@@ -92,6 +93,8 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
             case "show weather":
                 let vc = (segue.destination as! UINavigationController).topViewController! as! ModularCollectionController
                 vc.module = .WeatherConditions
+                vc.selectedItems = entry.weatherConditions as! Set<NSManagedObject>?
+                vc.entry = entry
             default: break
             }
         }
@@ -203,6 +206,11 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
         dismissFirstResponder()
         AppDelegate.diaryViewContext.rollback()
         presentingViewController?.dismiss(animated: true)
+    }
+    
+    @IBAction func didFinish(withWeatherConditions segue: UIStoryboardSegue) {
+        let vc = segue.source as! ModularCollectionController
+        print(vc.selectedIndexPaths!)
     }
     
     // MARK: - LIFE CYCLE
