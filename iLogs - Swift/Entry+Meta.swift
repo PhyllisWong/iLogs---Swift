@@ -36,6 +36,35 @@ extension WeatherCondition {
             return WeatherCondition.Types.array.first { $0.rawValue == rawValue }
         }
         
+        /** true if the enum case has scales like think fog for foggy or strong winds for windy */
+        var hasScalableTypes: Bool {
+            switch self {
+            case .Cloudy, .Windy, .Foggy, .Rainy, .Stormy, .Snowy:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        var scalableTypes: [ScaleDescriptor]? {
+            switch self {
+            case .Cloudy:
+                return CloudyScale.array
+            case .Windy:
+                return WindyScale.array
+            case .Foggy:
+                return FogScale.array
+            case .Rainy:
+                return RainScale.array
+            case .Stormy:
+                return StormScale.array
+            case .Snowy:
+                return SnowyScale.array
+            default:
+                return nil
+            }
+        }
+        
         var meta: (name: String, image: (icon: UIImage, enlarged: UIImage)) {
             switch self {
             case .Sunny:
@@ -63,9 +92,9 @@ extension WeatherCondition {
     }
     
     enum CloudyScale: Int16, ScaleDescriptor {
-        case Light
-        case Broken
-        case Overcast
+        case Light = 1
+        case Broken = 2
+        case Overcast = 3
         
         static var array: [CloudyScale] = [.Light,.Broken,.Overcast]
         
@@ -82,9 +111,9 @@ extension WeatherCondition {
     }
     
     enum WindyScale: Int16, ScaleDescriptor {
-        case Low
-        case Mild
-        case Strong
+        case Low = 1
+        case Mild = 2
+        case Strong = 3
         
         static var array: [WindyScale] = [.Low,.Mild,.Strong]
         
@@ -101,9 +130,9 @@ extension WeatherCondition {
     }
     
     enum FogScale: Int16, ScaleDescriptor {
-        case Light
-        case Mild
-        case Thick
+        case Light = 1
+        case Mild = 2
+        case Thick = 3
         
         static var array: [FogScale] = [.Light,.Mild,.Thick]
         
@@ -120,9 +149,9 @@ extension WeatherCondition {
     }
     
     enum RainScale: Int16, ScaleDescriptor {
-        case Drizzle
-        case Shower
-        case Pour
+        case Drizzle = 1
+        case Shower = 2
+        case Pour = 3
         
         static var array: [RainScale] = [.Drizzle,.Shower,.Pour]
         
@@ -139,9 +168,9 @@ extension WeatherCondition {
     }
     
     enum StormScale: Int16, ScaleDescriptor {
-        case Mild
-        case Heavy
-        case Lighting
+        case Mild = 1
+        case Heavy = 2
+        case Lighting = 3
         
         static var array: [StormScale] = [.Mild,.Heavy,.Lighting]
         
@@ -158,9 +187,9 @@ extension WeatherCondition {
     }
     
     enum SnowyScale: Int16, ScaleDescriptor {
-        case Light
-        case Mild
-        case Hale
+        case Light = 1
+        case Mild = 2
+        case Hale = 3
         
         static var array: [SnowyScale] = [.Light,.Mild,.Hale]
         

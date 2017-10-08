@@ -576,7 +576,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="misc_weatherClear" translatesAutoresizingMaskIntoConstraints="NO" id="PUM-BH-VPA">
-                                                    <rect key="frame" x="18" y="8" width="36" height="36"/>
+                                                    <rect key="frame" x="36" y="8" width="36" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="Q2S-C2-qdg"/>
                                                         <constraint firstAttribute="width" constant="36" id="Zja-jx-fQi"/>
@@ -584,6 +584,7 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="PUM-BH-VPA" firstAttribute="top" secondItem="2WK-99-tL6" secondAttribute="top" constant="8" id="7JQ-fT-AXl"/>
                                             <constraint firstAttribute="trailing" secondItem="Cvj-ZQ-dso" secondAttribute="trailing" id="8jf-k9-raD"/>

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ModularCollectionController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ModularCollectionController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CustomCollectionViewCellDelegate {
     
     enum CollectionModule {
         case Emotions
@@ -58,6 +58,13 @@ class ModularCollectionController: UIViewController, UICollectionViewDataSource,
             }
             cell.imageView.image = weatherConditionType.meta.image.icon
             cell.labelSubtitle.text = nil
+            cell.delegate = self
+            // removes long press for types that do not have scalable types
+            if weatherConditionType.hasScalableTypes == false {
+                if let longPress = cell.gestureRecognizers?.first {
+                    cell.removeGestureRecognizer(longPress)
+                }
+            }
         default:
             break
         }
@@ -126,6 +133,28 @@ class ModularCollectionController: UIViewController, UICollectionViewDataSource,
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.backgroundColor = UIColor.white
             deselect(indexPath)
+        }
+    }
+    
+    // MARK: Custom Collection Cell Delegate
+    
+    func custom(cell: CustomCollectionViewCell, didLongPress gesture: UILongPressGestureRecognizer) {
+        switch module {
+        case .Emotions:
+            break
+        case .WeatherConditions:
+            let cell = gesture.view! as! CustomCollectionViewCell
+            let indexPath = collectionView.indexPath(for: cell)!
+            let alert = UIAlertController(title: "Add a Weather Condition", message: "select a scale", preferredStyle: .actionSheet)
+            let scalableWeatherCondition = WeatherCondition.Types(rawValue: Int16(indexPath.row))!
+            scalableWeatherCondition.scalableTypes!.forEach({ [weak self] (scale) in
+                alert.addAction(UIAlertAction(title: scale.name, style: .default, handler: { [weak self] (action) in
+                    let newCondition = WeatherCondition(conditionType: scalableWeatherCondition, scaleType: scale, for: self!.entry, in: AppDelegate.diaryViewContext)
+                    self!.selectedItems!.insert(newCondition)
+                    self!.collectionView.reloadItems(at: [indexPath])
+                }))
+            })
+            self.present(alert, animated: true)
         }
     }
     
