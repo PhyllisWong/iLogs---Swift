@@ -11,7 +11,7 @@ import UIKit
 
 /** Pass this protocol to allow any of the scales as a single type */
 protocol ScaleDescriptor {
-    var name: String? { get }
+    var name: String { get }
     
     var rawValue: Int16 { get }
 }
@@ -32,8 +32,8 @@ extension WeatherCondition {
         
         static var array: [Types] = [.Sunny,.Clear,.Cloudy,.Windy,.Foggy,.Gloomy,.Misty,.Rainy,.Stormy,.Snowy]
         
-        static func type(`for` value: Int16) -> WeatherCondition.Types? {
-            return WeatherCondition.Types.array.first { $0.rawValue == value }
+        static func type(`for` rawValue: Int16) -> WeatherCondition.Types? {
+            return WeatherCondition.Types.array.first { $0.rawValue == rawValue }
         }
         
         var meta: (name: String, image: (icon: UIImage, enlarged: UIImage)) {
@@ -62,26 +62,15 @@ extension WeatherCondition {
         }
     }
     
-    enum NoneScale: Int16, ScaleDescriptor {
-        case None = -1
-        static var array: [NoneScale] = []
-        var name: String? {
-            return nil
-        }
-    }
-    
     enum CloudyScale: Int16, ScaleDescriptor {
-        case NotSet = -1
         case Light
         case Broken
         case Overcast
         
         static var array: [CloudyScale] = [.Light,.Broken,.Overcast]
         
-        var name: String? {
+        var name: String {
             switch self {
-            case .NotSet:
-                return nil
             case .Light:
                 return "Light Clouds"
             case .Broken:
@@ -93,17 +82,14 @@ extension WeatherCondition {
     }
     
     enum WindyScale: Int16, ScaleDescriptor {
-        case NotSet = -1
         case Low
         case Mild
         case Strong
         
         static var array: [WindyScale] = [.Low,.Mild,.Strong]
         
-        var name: String? {
+        var name: String {
             switch self {
-            case .NotSet:
-                return nil
             case .Low:
                 return "Low Winds"
             case .Mild:
@@ -115,17 +101,14 @@ extension WeatherCondition {
     }
     
     enum FogScale: Int16, ScaleDescriptor {
-        case NotSet = -1
         case Light
         case Mild
         case Thick
         
         static var array: [FogScale] = [.Light,.Mild,.Thick]
         
-        var name: String? {
+        var name: String {
             switch self {
-            case .NotSet:
-                return nil
             case .Light:
                 return "Light Fog"
             case .Mild:
@@ -137,17 +120,14 @@ extension WeatherCondition {
     }
     
     enum RainScale: Int16, ScaleDescriptor {
-        case NotSet = -1
         case Drizzle
         case Shower
         case Pour
         
         static var array: [RainScale] = [.Drizzle,.Shower,.Pour]
         
-        var name: String? {
+        var name: String {
             switch self {
-            case .NotSet:
-                return nil
             case .Drizzle:
                 return "Drizzle"
             case .Shower:
@@ -159,17 +139,14 @@ extension WeatherCondition {
     }
     
     enum StormScale: Int16, ScaleDescriptor {
-        case NotSet = -1
         case Mild
         case Heavy
         case Lighting
         
         static var array: [StormScale] = [.Mild,.Heavy,.Lighting]
         
-        var name: String? {
+        var name: String {
             switch self {
-            case .NotSet:
-                return nil
             case .Mild:
                 return "Mild Storm"
             case .Heavy:
@@ -181,17 +158,14 @@ extension WeatherCondition {
     }
     
     enum SnowyScale: Int16, ScaleDescriptor {
-        case NotSet = -1
         case Light
         case Mild
         case Hale
         
         static var array: [SnowyScale] = [.Light,.Mild,.Hale]
         
-        var name: String? {
+        var name: String {
             switch self {
-            case .NotSet:
-                return nil
             case .Light:
                 return "Light Snow"
             case .Mild:

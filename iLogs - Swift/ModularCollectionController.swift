@@ -47,17 +47,17 @@ class ModularCollectionController: UIViewController, UICollectionViewDataSource,
         switch module {
         case .WeatherConditions:
             let weatherConditionType = WeatherCondition.Types.array[indexPath.row]
-            cell.imageView.image = weatherConditionType.meta.image.icon
-            cell.labelTitle.text = weatherConditionType.meta.name
             if cell.isSelected {
                 let selectedWeatherConditionItems = selectedItems as! Set<WeatherCondition>
                 let selectedWeatherCondition = selectedWeatherConditionItems.first { $0.conditionType.rawValue == weatherConditionType.rawValue }!
-                cell.labelSubtitle.text = selectedWeatherCondition.name
+                cell.labelTitle.text = selectedWeatherCondition.name
                 cell.backgroundColor = UIColor.blue.withAlphaComponent(0.3)
             } else {
-                cell.labelSubtitle.text = nil
+                cell.labelTitle.text = weatherConditionType.meta.name
                 cell.backgroundColor = UIColor.white
             }
+            cell.imageView.image = weatherConditionType.meta.image.icon
+            cell.labelSubtitle.text = nil
         default:
             break
         }
@@ -92,8 +92,7 @@ class ModularCollectionController: UIViewController, UICollectionViewDataSource,
         switch module {
         case .WeatherConditions:
             let conditionType = WeatherCondition.Types.type(for: Int16(indexPath.row))!
-            
-            let newCondition = WeatherCondition(conditionType: conditionType, scaleType: WeatherCondition.CloudyScale.Broken, for: entry, in: AppDelegate.diaryViewContext)
+            let newCondition = WeatherCondition(conditionType: conditionType, scaleType: nil, for: entry, in: AppDelegate.diaryViewContext)
             selectedItems!.insert(newCondition)
         case .Emotions:
             break
@@ -101,13 +100,13 @@ class ModularCollectionController: UIViewController, UICollectionViewDataSource,
     }
     
     private func deselect(_ indexPath: IndexPath) {
-        switch  module {
+        switch module {
         case .WeatherConditions:
             let selectedWeatherConditions = selectedItems as! Set<WeatherCondition>
-            let conditionType = WeatherCondition.Types.type(for: Int16(indexPath.row))!
-            let conditionToRemove = selectedWeatherConditions.first { $0.conditionType == conditionType }!
-            selectedItems!.remove(conditionToRemove)
+            let conditionType = WeatherCondition.Types(rawValue: Int16(indexPath.row))!
+            let conditionToRemove = selectedWeatherConditions.first { $0.conditionValue == conditionType.rawValue }!
             AppDelegate.diaryViewContext.delete(conditionToRemove)
+            selectedItems!.remove(conditionToRemove)
         case .Emotions:
             break
         }

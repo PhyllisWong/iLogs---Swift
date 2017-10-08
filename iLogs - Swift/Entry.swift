@@ -27,12 +27,12 @@ extension NSFetchedResultsController {
 }
 
 extension WeatherCondition {
-    convenience init(conditionType: WeatherCondition.Types, scaleType scale: ScaleDescriptor, `for` entry: Entry, `in` context: NSManagedObjectContext) {
+    convenience init(conditionType: WeatherCondition.Types, scaleType scale: ScaleDescriptor?, `for` entry: Entry, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.entry = entry
         self.conditionValue = conditionType.rawValue
-        self.scaleValue = scale.rawValue
+        self.scaleValue = scale?.rawValue ?? 0 //zero is the nil value
     }
     
     /** Convert Weather Condition Value to a type */
@@ -41,27 +41,30 @@ extension WeatherCondition {
     }
     
     var scaleType: ScaleDescriptor? {
-        switch conditionType {
-        case .Cloudy:
-            let type = WeatherCondition.CloudyScale(rawValue: scaleValue)!
-            return type == .NotSet ? nil : type
-        case .Windy:
-            let type = WeatherCondition.WindyScale(rawValue: scaleValue)!
-            return type == .NotSet ? nil : type
-        case .Foggy:
-            let type = WeatherCondition.FogScale(rawValue: scaleValue)!
-            return type == .NotSet ? nil : type
-        case .Rainy:
-            let type = WeatherCondition.RainScale(rawValue: scaleValue)!
-            return type == .NotSet ? nil : type
-        case .Stormy:
-            let type = WeatherCondition.StormScale(rawValue: scaleValue)!
-            return type == .NotSet ? nil : type
-        case .Snowy:
-            let type = WeatherCondition.SnowyScale(rawValue: scaleValue)!
-            return type == .NotSet ? nil : type
-        default:
-            return nil
+        set {
+            scaleValue = scaleType?.rawValue ?? 0
+        }
+        get {
+            if scaleValue == 0 {
+                return nil
+            } else {
+                switch conditionType {
+                case .Cloudy:
+                    return WeatherCondition.CloudyScale(rawValue: scaleValue)!
+                case .Windy:
+                    return WeatherCondition.WindyScale(rawValue: scaleValue)!
+                case .Foggy:
+                    return WeatherCondition.FogScale(rawValue: scaleValue)!
+                case .Rainy:
+                    return WeatherCondition.RainScale(rawValue: scaleValue)!
+                case .Stormy:
+                    return WeatherCondition.StormScale(rawValue: scaleValue)!
+                case .Snowy:
+                    return WeatherCondition.SnowyScale(rawValue: scaleValue)!
+                default:
+                    return nil
+                }
+            }
         }
     }
     

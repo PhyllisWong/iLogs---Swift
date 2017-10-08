@@ -57,7 +57,7 @@
     </entity>
     <entity name="WeatherConditions" representedClassName="WeatherCondition" syncable="YES" codeGenerationType="class">
         <attribute name="conditionValue" attributeType="Integer 16" usesScalarValueType="YES" customClassName="WeatherConditionType" syncable="YES"/>
-        <attribute name="scaleValue" attributeType="Integer 16" defaultValueString="-1" usesScalarValueType="YES" customClassName="WeatherConditionScale" syncable="YES"/>
+        <attribute name="scaleValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" customClassName="WeatherConditionScale" syncable="YES"/>
         <relationship name="entry" maxCount="1" deletionRule="Nullify" destinationEntity="Entries" inverseName="weatherConditions" inverseEntity="Entries" syncable="YES"/>
     </entity>
     <elements>
