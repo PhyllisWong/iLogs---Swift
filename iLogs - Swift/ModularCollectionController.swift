@@ -132,7 +132,14 @@ class ModularCollectionController: UIViewController, UICollectionViewDataSource,
     
     // MARK: - IBACTIONS
     
+    @IBAction func pressSave(_ sender: Any) {
+        entry.managedObjectContext!.undoManager!.endUndoGrouping()
+        presentingViewController!.dismiss(animated: true)
+    }
+    
     @IBAction func pressDismiss(_ sender: Any) {
+        entry.managedObjectContext!.undoManager!.endUndoGrouping()
+        entry.managedObjectContext!.undo()
         presentingViewController!.dismiss(animated: true)
     }
     
@@ -144,6 +151,12 @@ class ModularCollectionController: UIViewController, UICollectionViewDataSource,
         collectionView.allowsMultipleSelection = true
         
         updateUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        entry.managedObjectContext!.undoManager!.beginUndoGrouping()
     }
 
 }

@@ -208,11 +208,6 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
         presentingViewController?.dismiss(animated: true)
     }
     
-    @IBAction func didFinish(withWeatherConditions segue: UIStoryboardSegue) {
-        let vc = segue.source as! ModularCollectionController
-        print(vc.selectedIndexPaths!)
-    }
-    
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {

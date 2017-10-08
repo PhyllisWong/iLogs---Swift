@@ -37,6 +37,9 @@ class DiaryController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        
+        container.viewContext.undoManager = UndoManager()
+        
         return container
     }()
     
