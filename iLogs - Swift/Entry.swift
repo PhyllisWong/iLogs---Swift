@@ -27,38 +27,45 @@ extension NSFetchedResultsController {
 }
 
 extension WeatherCondition {
-    convenience init(conditionType: WeatherCondition.Types, scaleType scale: ScaleDescriptor, `in` context: NSManagedObjectContext) {
+    convenience init(conditionType: WeatherCondition.Types, scaleType scale: ScaleDescriptor, `for` entry: Entry, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         
-        self.conditionValue = conditionType.meta.rawValue
-        self.scaleValue = scale.meta.rawValue
+        self.entry = entry
+        self.conditionValue = conditionType.rawValue
+        self.scaleValue = scale.rawValue
     }
     
-    /** Convert Weather Condition to a type. This includes the associated values as an optional scale */
+    /** Convert Weather Condition Value to a type */
     var conditionType: WeatherCondition.Types {
-        //Looks for the weather condition type according to the condition value, non-nil
-        let type = WeatherCondition.Types.array.first { $0.meta.rawValue == conditionValue }!
-        switch type {
+        return WeatherCondition.Types(rawValue: conditionValue)!
+    }
+    
+    var scaleType: ScaleDescriptor? {
+        switch conditionType {
         case .Cloudy:
-            //Looks for the scale type according to the scale value
-            return .Cloudy(WeatherCondition.Types.CloudyScale.array.first { $0.meta.rawValue == scaleValue })
+            let type = WeatherCondition.CloudyScale(rawValue: scaleValue)!
+            return type == .NotSet ? nil : type
         case .Windy:
-            //Looks for the scale type according to the scale value
-            return .Windy(WeatherCondition.Types.WindyScale.array.first { $0.meta.rawValue == scaleValue })
+            let type = WeatherCondition.WindyScale(rawValue: scaleValue)!
+            return type == .NotSet ? nil : type
         case .Foggy:
-            //Looks for the scale type according to the scale value
-            return .Foggy(WeatherCondition.Types.FogScale.array.first { $0.meta.rawValue == scaleValue })
+            let type = WeatherCondition.FogScale(rawValue: scaleValue)!
+            return type == .NotSet ? nil : type
         case .Rainy:
-            //Looks for the scale type according to the scale value
-            return .Rainy(WeatherCondition.Types.RainScale.array.first { $0.meta.rawValue == scaleValue })
+            let type = WeatherCondition.RainScale(rawValue: scaleValue)!
+            return type == .NotSet ? nil : type
         case .Stormy:
-            //Looks for the scale type according to the scale value
-            return .Stormy(WeatherCondition.Types.StormScale.array.first { $0.meta.rawValue == scaleValue })
+            let type = WeatherCondition.StormScale(rawValue: scaleValue)!
+            return type == .NotSet ? nil : type
         case .Snowy:
-            //Looks for the scale type according to the scale value
-            return .Snowy(WeatherCondition.Types.SnowyScale.array.first { $0.meta.rawValue == scaleValue })
+            let type = WeatherCondition.SnowyScale(rawValue: scaleValue)!
+            return type == .NotSet ? nil : type
         default:
-            return type
+            return nil
         }
+    }
+    
+    var name: String {
+        return scaleType?.name ?? conditionType.meta.name
     }
 }
