@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-/** Pass this protocol to allow any of the scales as a single type */
+/** Pass this protocol to allow any scalable types as a single type */
 protocol ScaleDescriptor {
     var name: String { get }
     
@@ -28,7 +28,7 @@ extension WeatherCondition {
         case Rainy
         case Stormy
         case Snowy
-        //TODO : Rename Weather Conditions
+        //TODO : Maybe Rename Weather Conditions
         
         static var array: [Types] = [.Sunny,.Clear,.Cloudy,.Windy,.Foggy,.Gloomy,.Misty,.Rainy,.Stormy,.Snowy]
         
@@ -36,7 +36,10 @@ extension WeatherCondition {
             return WeatherCondition.Types.array.first { $0.rawValue == rawValue }
         }
         
-        /** true if the enum case has scales like think fog for foggy or strong winds for windy */
+        /**
+         true if the enum case has scales like think fog for foggy or strong
+         winds for windy
+         */
         var hasScalableTypes: Bool {
             switch self {
             case .Cloudy, .Windy, .Foggy, .Rainy, .Stormy, .Snowy:
@@ -46,6 +49,7 @@ extension WeatherCondition {
             }
         }
         
+        /** an array of all scalable types */
         var scalableTypes: [ScaleDescriptor]? {
             switch self {
             case .Cloudy:
@@ -65,6 +69,7 @@ extension WeatherCondition {
             }
         }
         
+        /** contains each type's name, image, and enlarged image */
         var meta: (name: String, image: (icon: UIImage, enlarged: UIImage)) {
             switch self {
             case .Sunny:
@@ -114,7 +119,7 @@ extension WeatherCondition {
         case Low = 1
         case Mild = 2
         case Strong = 3
-        
+          
         static var array: [WindyScale] = [.Low,.Mild,.Strong]
         
         var name: String {

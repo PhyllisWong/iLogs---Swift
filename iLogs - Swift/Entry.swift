@@ -45,6 +45,7 @@ extension WeatherCondition {
             scaleValue = scaleType?.rawValue ?? 0
         }
         get {
+            //default: not set to any scale
             if scaleValue == 0 {
                 return nil
             } else {
@@ -61,13 +62,17 @@ extension WeatherCondition {
                     return WeatherCondition.StormScale(rawValue: scaleValue)!
                 case .Snowy:
                     return WeatherCondition.SnowyScale(rawValue: scaleValue)!
-                default:
+                default: //for non-scalable weather types
                     return nil
                 }
             }
         }
     }
     
+    /**
+     returns a scalable type's title if .scaleType != nil , otherwise return
+     the type.title
+     */
     var name: String {
         return scaleType?.name ?? conditionType.meta.name
     }

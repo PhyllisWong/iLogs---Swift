@@ -532,7 +532,7 @@
         <!--Select-->
         <scene sceneID="uUh-SP-CnG">
             <objects>
-                <viewController id="VIS-h1-kKW" customClass="ModularCollectionController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VIS-h1-kKW" customClass="EntryCollectionViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4WO-Bb-zP9"/>
                         <viewControllerLayoutGuide type="bottom" id="wOy-Tw-ldq"/>
@@ -545,50 +545,50 @@
                                 <rect key="frame" x="20" y="64" width="335" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hz6-0L-XsO">
-                                    <size key="itemSize" width="72" height="92"/>
+                                    <size key="itemSize" width="76" height="92"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="2WK-99-tL6" customClass="CustomCollectionViewCell" customModule="iLogs___Swift" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="92"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="92"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="72" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="76" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="misc_weatherClear" translatesAutoresizingMaskIntoConstraints="NO" id="PUM-BH-VPA">
+                                                    <rect key="frame" x="38" y="8" width="36" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="Q2S-C2-qdg"/>
+                                                        <constraint firstAttribute="width" constant="36" id="Zja-jx-fQi"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cvj-ZQ-dso">
-                                                    <rect key="frame" x="0.0" y="44" width="72" height="34"/>
+                                                    <rect key="frame" x="4" y="44" width="76" height="34"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lR4-7K-zE4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="72" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lR4-7K-zE4">
+                                                            <rect key="frame" x="0.0" y="0.0" width="76" height="20.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41H-ch-72H">
-                                                            <rect key="frame" x="0.0" y="20.5" width="72" height="13.5"/>
+                                                            <rect key="frame" x="0.0" y="20.5" width="76" height="13.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="misc_weatherClear" translatesAutoresizingMaskIntoConstraints="NO" id="PUM-BH-VPA">
-                                                    <rect key="frame" x="36" y="8" width="36" height="36"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="Q2S-C2-qdg"/>
-                                                        <constraint firstAttribute="width" constant="36" id="Zja-jx-fQi"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="PUM-BH-VPA" firstAttribute="top" secondItem="2WK-99-tL6" secondAttribute="top" constant="8" id="7JQ-fT-AXl"/>
-                                            <constraint firstAttribute="trailing" secondItem="Cvj-ZQ-dso" secondAttribute="trailing" id="8jf-k9-raD"/>
-                                            <constraint firstItem="Cvj-ZQ-dso" firstAttribute="leading" secondItem="2WK-99-tL6" secondAttribute="leading" id="GE4-ne-aQp"/>
+                                            <constraint firstAttribute="trailing" secondItem="Cvj-ZQ-dso" secondAttribute="trailing" constant="4" id="8jf-k9-raD"/>
+                                            <constraint firstItem="Cvj-ZQ-dso" firstAttribute="leading" secondItem="2WK-99-tL6" secondAttribute="leading" constant="4" id="GE4-ne-aQp"/>
                                             <constraint firstItem="PUM-BH-VPA" firstAttribute="centerX" secondItem="2WK-99-tL6" secondAttribute="centerX" id="kgL-Xn-7Pm"/>
                                             <constraint firstItem="Cvj-ZQ-dso" firstAttribute="top" secondItem="PUM-BH-VPA" secondAttribute="bottom" id="lxP-CE-01n"/>
                                         </constraints>

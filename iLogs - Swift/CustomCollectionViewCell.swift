@@ -29,10 +29,29 @@ class CustomCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    public func configure(type: WeatherCondition.Types, weatherCondition: WeatherCondition? = nil) {
+        if self.isSelected {
+            self.labelTitle.text = weatherCondition!.name
+            self.backgroundColor = UIColor.blue.withAlphaComponent(0.3)
+        } else {
+            self.labelTitle.text = type.meta.name
+            self.backgroundColor = UIColor.white
+        }
+        self.imageView.image = type.meta.image.icon
+        self.labelSubtitle.text = nil
+    }
+    
     @objc func longGestureRecognizer(gesture: UILongPressGestureRecognizer) {
         delegate?.custom!(cell: self, didLongPress: gesture)
     }
     
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
     override func awakeFromNib() {
         super.awakeFromNib()
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(longGestureRecognizer(gesture:)))

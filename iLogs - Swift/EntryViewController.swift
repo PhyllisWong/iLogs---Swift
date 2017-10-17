@@ -91,8 +91,8 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
                 vc.delegate = self
                 vc.value = entry.body
             case "show weather":
-                let vc = (segue.destination as! UINavigationController).topViewController! as! ModularCollectionController
-                vc.module = .WeatherConditions
+                let vc = (segue.destination as! UINavigationController).topViewController! as! EntryCollectionViewController
+                vc.mode = .WeatherConditions
                 vc.selectedItems = entry.weatherConditions as! Set<NSManagedObject>?
                 vc.entry = entry
             default: break
