@@ -72,6 +72,8 @@ class TimersTableViewController: FetchedResultsTableViewController {
         
         self.saveHandler = AppDelegate.sharedInstance.timersController.saveContext
         
+        AppDelegate.sharedInstance.dismissableViewControllers.insert(self)
+        
         updateUI()
     }
 

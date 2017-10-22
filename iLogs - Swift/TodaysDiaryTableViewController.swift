@@ -66,6 +66,8 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
         
         saveHandler = AppDelegate.sharedInstance.diaryController.saveContext
         
+        AppDelegate.sharedInstance.dismissableViewControllers.insert(self)
+        
         updateUI()
     }
     
