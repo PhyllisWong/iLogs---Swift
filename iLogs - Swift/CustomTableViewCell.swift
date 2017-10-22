@@ -14,24 +14,34 @@ protocol CustomTableViewCellDelegate {
 }
 
 class CustomTableViewCell: UITableViewCell {
-    
+
     var delegate: CustomTableViewCellDelegate?
-    
+
     @IBOutlet weak var labelTitle: UILabel!
-    
+    @IBOutlet weak var labelSubtitle: UILabel!
+    @IBOutlet weak var labelCaption: UILabel!
+    @IBOutlet weak var labelCaption2: UILabel!
+    @IBOutlet weak var textView: UITextView!
+
+    var refreshTimer: UIKit.Timer? {
+        didSet {
+            refreshTimer?.fire()
+        }
+    }
+
     @IBOutlet weak var switcher: UISwitch!
     @IBAction func switchDidChange(_ sender: UISwitch) {
         delegate?.customCell!(self, switchDidChange: sender)
     }
-    
+
     @IBOutlet weak var imageViewPrefix: UIImageView!
-    
+
     // MARK: - RETURN VALUES
-    
+
     // MARK: - VOID METHODS
     
     // MARK: - IBACTIONS
-    
+
     // MARK: - LIFE CYCLE
 
     override func awakeFromNib() {
@@ -45,4 +55,14 @@ class CustomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension UITableView {
+    func dequeueReusableCustomCell(withIdentifier identifier: String, for indexPath: IndexPath) -> CustomTableViewCell {
+        return self.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! CustomTableViewCell
+    }
+
+    func customCellForRow(at indexPath: IndexPath) -> CustomTableViewCell? {
+        return self.cellForRow(at: indexPath) as! CustomTableViewCell?
+    }
 }

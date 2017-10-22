@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TimersTableViewController: FetchedResultsTableViewController {
+class TimersDirectoryTableViewController: FetchedResultsTableViewController {
     
     var currentDirectory: Directory?
     
@@ -19,7 +19,7 @@ class TimersTableViewController: FetchedResultsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         let row = fetchedResultsController.directory(at: indexPath)
-        cell.textLabel!.text = row.timer.title
+        cell.textLabel!.text = row.info!.title
         
         return cell
     }
@@ -41,21 +41,27 @@ class TimersTableViewController: FetchedResultsTableViewController {
         )
     }
     
-    /*
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     if let identifier = segue.identifier {
-     switch identifier {
-     case <#pattern#>:
-     <#code#>
-     default:
-     break
-     }
-     }
-     }*/
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show directory":
+                break
+            case "show timer":
+                let vc = segue.destination as! TimerViewController
+                let indexPath = sender as! IndexPath
+                let directory = fetchedResultsController.directory(at: indexPath)
+                vc.timer = directory.timer
+            default:
+                break
+            }
+        }
+    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: Table View Delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: check what cell was tapped, timer or a folder
+        self.performSegue(withIdentifier: "show timer", sender: indexPath)
     }
     
     // MARK: - IBACTIONS

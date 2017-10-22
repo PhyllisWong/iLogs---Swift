@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Directories" representedClassName="Directory" syncable="YES" codeGenerationType="class">
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Directories" inverseName="parent" inverseEntity="Directories" syncable="YES"/>
         <relationship name="info" maxCount="1" deletionRule="Cascade" destinationEntity="DirectoryInfos" inverseName="directory" inverseEntity="DirectoryInfos" syncable="YES"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Directories" inverseName="children" inverseEntity="Directories" syncable="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Directories" inverseName="children" inverseEntity="Directories" syncable="YES"/>
     </entity>
     <entity name="DirectoryInfos" representedClassName="DirectoryInfo" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -15,15 +15,16 @@
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="timeStamps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TimeStamps" inverseName="timer" inverseEntity="TimeStamps" syncable="YES"/>
     </entity>
-    <entity name="TimeStamps" representedClassName="TimeStamps" syncable="YES" codeGenerationType="class">
-        <attribute name="stamp" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    <entity name="TimeStamps" representedClassName="TimeStamp" syncable="YES" codeGenerationType="class">
+        <attribute name="stampValue" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timeStamp" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="timer" maxCount="1" deletionRule="Nullify" destinationEntity="Timers" inverseName="timeStamps" inverseEntity="Timers" syncable="YES"/>
     </entity>
     <elements>
         <element name="Directories" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="DirectoryInfos" positionX="-18" positionY="54" width="128" height="90"/>
         <element name="Folders" positionX="-54" positionY="18" width="128" height="45"/>
         <element name="Timers" positionX="-36" positionY="27" width="128" height="75"/>
-        <element name="DirectoryInfos" positionX="-18" positionY="54" width="128" height="90"/>
-        <element name="TimeStamps" positionX="0" positionY="72" width="128" height="75"/>
+        <element name="TimeStamps" positionX="0" positionY="72" width="128" height="90"/>
     </elements>
 </model>

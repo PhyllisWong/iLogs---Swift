@@ -69,7 +69,7 @@ class EntryViewController: UITableViewController, UITextFieldDelegate, ModularTa
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         switch keyPath! {
         case "diary":
-            labelDiary.text = entry.diary!.title
+            labelDiary.text = entry.diary!.title // TODO : crash found here by adding a new entry with no default diary created
         case "body":
             textViewBody.text = entry.body
         case "isBookMarked":

@@ -25,3 +25,30 @@ extension Directory {
         return self.info! as! Timer
     }
 }
+
+extension NSFetchedResultsController {
+    func timer(at indexPath: IndexPath) -> iLogs___Swift.Timer {
+        return self.object(at: indexPath) as! iLogs___Swift.Timer
+    }
+}
+
+extension TimeStamp {
+    enum Types: Int16 {
+        case Start
+        case Stop
+    }
+    
+    convenience init(type: Types, timeStamp date: Date = Date(), timer: iLogs___Swift.Timer, `in` context: NSManagedObjectContext) {
+        self.init(context: context)
+        
+        self.timeStamp = date as NSDate
+        self.timer = timer
+        self.stampValue = type.rawValue
+    }
+}
+
+extension NSFetchedResultsController {
+    func timeStamp(at indexPath: IndexPath) -> TimeStamp {
+        return self.object(at: indexPath) as! TimeStamp
+    }
+}
