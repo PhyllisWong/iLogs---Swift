@@ -109,6 +109,8 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         }
     }
     
+    private var refreshTimer: UIKit.Timer?
+    
     private let controller = AppDelegate.sharedInstance.timersController
     
     // MARK: - RETURN VALUES
@@ -121,24 +123,18 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         let timeStamp = fetchedResultsController.timeStamp(at: indexPath)
         let cell: CustomTableViewCell
         
-        // TODO : Remove timers from each cell instead reload the table
-        
         //Last time stamp in collection thus show initial cell
         if timeStamp == fetchedResultsController.fetchedObjects!.last! {
             cell = tableView.dequeueReusableCustomCell(withIdentifier: "initial", for: indexPath)
-            cell.refreshTimer = UIKit.Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak cell] (timer) in
-                guard let stamp = timeStamp.timeStamp as Date? else {return}
-                cell?.config(timeStamp: stamp)
-            })
+            let stamp = timeStamp.timeStamp! as Date
+            cell.config(timeStamp: stamp)
         } else {
             cell = tableView.dequeueReusableCustomCell(withIdentifier: "extended", for: indexPath)
             let adjacentIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
             let adjacentTimeStamp = fetchedResultsController.timeStamp(at: adjacentIndexPath)
-            cell.refreshTimer = UIKit.Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak cell] (timer) in
-                guard let stamp = timeStamp.timeStamp as Date? else {return}
-                guard let adjacentStamp = adjacentTimeStamp.timeStamp as Date? else {return}
-                cell?.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
-            })
+            let stamp = timeStamp.timeStamp! as Date
+            let adjacentStamp = adjacentTimeStamp.timeStamp as Date?
+            cell.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
         }
         
         return cell
@@ -182,6 +178,22 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         saveHandler = controller.saveContext
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 78
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        refreshTimer = UIKit.Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
+            if self?.tableView.isEditing == false {
+                self?.tableView.reloadData() // TODO : May break during iCloud Sync
+            }
+        })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        refreshTimer?.invalidate()
     }
     
 }
