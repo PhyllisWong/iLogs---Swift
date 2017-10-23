@@ -17,6 +17,7 @@
 		E963AFF21F78A4010008EDEA /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFF11F78A4010008EDEA /* Directory.swift */; };
 		E9854B191F969B780030B533 /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9854B181F969B780030B533 /* UniversalExtentions.swift */; };
 		E9854B1B1F9AC5B60030B533 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9854B1A1F9AC5B60030B533 /* TextView.swift */; };
+		E99CDC021F9D2C4C00BE2018 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */; };
 		E9AA69961F7756ED007F07FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA69951F7756ED007F07FB /* AppDelegate.swift */; };
 		E9AA699B1F7756ED007F07FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AA69991F7756ED007F07FB /* Main.storyboard */; };
 		E9AA69A01F7756ED007F07FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9AA699F1F7756ED007F07FB /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		E963AFF11F78A4010008EDEA /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
 		E9854B181F969B780030B533 /* UniversalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
 		E9854B1A1F9AC5B60030B533 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		E9AA69921F7756ED007F07FB /* iLogs - Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iLogs - Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AA69951F7756ED007F07FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9AA699A1F7756ED007F07FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				E9AA69C91F77591D007F07FB /* Controllers */,
 				E9AA69CB1F775948007F07FB /* Diary */,
 				E963AFEA1F789A7D0008EDEA /* Timers */,
+				E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */,
 				E9AA69991F7756ED007F07FB /* Main.storyboard */,
 				E9AA69CA1F775935007F07FB /* Supporting Files */,
 			);
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99CDC021F9D2C4C00BE2018 /* TopViewController.swift in Sources */,
 				E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */,
 				E963AFEC1F789D0D0008EDEA /* TimersController.swift in Sources */,
 				E963AFF01F78A09E0008EDEA /* Timer.swift in Sources */,
