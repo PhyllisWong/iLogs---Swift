@@ -9,9 +9,11 @@
 import UIKit
 import CoreData
 
-class TimerViewController: UIViewController, UITextViewDelegate {
+class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     var timer: iLogs___Swift.Timer!
+    
+    private let controller = AppDelegate.sharedInstance.timersController
     
     @IBOutlet private weak var textView: UITextView! {
         didSet {
@@ -19,7 +21,26 @@ class TimerViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    @IBOutlet weak var textField: UITextField! {
+        didSet {
+            textField.text = timer.title
+        }
+    }
+    
     // MARK: - RETURN VALUES
+    
+    // MARK: Text Field Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        timer.title = textField.text
+        controller.saveContext()
+    }
     
     // MARK: Text View Delegate
     
@@ -47,19 +68,22 @@ class TimerViewController: UIViewController, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         timer.notes = textView.text
-        AppDelegate.sharedInstance.timersController.saveContext()
+        controller.saveContext()
     }
     
     // MARK: - IBACTIONS
     
     @IBAction private func pressAdd(_ sender: Any) {
         _ = TimeStamp(type: .Start, timer: timer, in: AppDelegate.timersViewContext)
-        AppDelegate.sharedInstance.timersController.saveContext()
+        controller.saveContext()
     }
     
     @IBAction private func dismissKeyboard(_ sender: Any) {
         if textView.isFirstResponder {
             textView.resignFirstResponder()
+        }
+        if textField.isFirstResponder {
+            textField.resignFirstResponder()
         }
     }
     
@@ -85,6 +109,8 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         }
     }
     
+    private let controller = AppDelegate.sharedInstance.timersController
+    
     // MARK: - RETURN VALUES
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -94,6 +120,8 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let timeStamp = fetchedResultsController.timeStamp(at: indexPath)
         let cell: CustomTableViewCell
+        
+        // TODO : Remove timers from each cell instead reload the table
         
         //Last time stamp in collection thus show initial cell
         if timeStamp == fetchedResultsController.fetchedObjects!.last! {
@@ -151,7 +179,7 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        saveHandler = AppDelegate.sharedInstance.timersController.saveContext
+        saveHandler = controller.saveContext
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 78
     }
@@ -161,7 +189,7 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
 extension CustomTableViewCell {
     
     fileprivate func config(timeStamp: Date, forExtendedCell adjacentTimeStamp: Date? = nil) {
-        self.labelTitle?.text = String(timeStamp, dateStyle: .long)
+        self.labelTitle?.text = String(timeStamp, dateStyle: .full, timeStyle: .medium)
         self.labelSubtitle?.text = String(timeStamp.timeIntervalSinceNow)
         if adjacentTimeStamp != nil {
             let interval = timeStamp.timeIntervalSince(adjacentTimeStamp!)
