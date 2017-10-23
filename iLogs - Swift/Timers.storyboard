@@ -74,7 +74,7 @@
             <objects>
                 <tableViewController id="rqa-qi-rpz" customClass="TimerFetchedRequestTableViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0BJ-rr-hnD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="383"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -228,13 +228,38 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2RF-9h-zm6">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ByF-vl-YLd">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nSF-DM-dh5">
+                                                <rect key="frame" x="15" y="15" width="345" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="cTj-Km-VYv"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="U5k-XT-sQD" id="swT-89-djQ"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="nSF-DM-dh5" secondAttribute="trailing" constant="15" id="8U1-lD-GYG"/>
+                                            <constraint firstAttribute="bottom" secondItem="nSF-DM-dh5" secondAttribute="bottom" constant="15" id="AdR-0M-dse"/>
+                                            <constraint firstItem="nSF-DM-dh5" firstAttribute="leading" secondItem="ByF-vl-YLd" secondAttribute="leading" constant="15" id="ZW5-gc-y7q"/>
+                                            <constraint firstItem="nSF-DM-dh5" firstAttribute="top" secondItem="ByF-vl-YLd" secondAttribute="top" constant="15" id="bOA-sc-yUv"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKE-uZ-V6a">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                        <rect key="frame" x="0.0" y="64" width="375" height="164"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9M9-IY-W6g" customClass="TextView" customModule="iLogs___Swift" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="20" width="345" height="168"/>
+                                                <rect key="frame" x="15" y="20" width="345" height="112"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <connections>
@@ -243,7 +268,7 @@
                                                 </connections>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNC-YG-tts">
-                                                <rect key="frame" x="20" y="100.5" width="335" height="20.5"/>
+                                                <rect key="frame" x="20" y="72.5" width="335" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -256,22 +281,23 @@
                                             <constraint firstItem="fNC-YG-tts" firstAttribute="leading" secondItem="uKE-uZ-V6a" secondAttribute="leading" constant="20" symbolic="YES" id="5aw-mv-BV7"/>
                                             <constraint firstItem="fNC-YG-tts" firstAttribute="centerY" secondItem="uKE-uZ-V6a" secondAttribute="centerY" id="8jf-9b-BRX"/>
                                             <constraint firstAttribute="bottom" secondItem="9M9-IY-W6g" secondAttribute="bottom" constant="32" id="OoR-dy-kBu"/>
-                                            <constraint firstAttribute="height" constant="220" id="Zmd-ah-JVK"/>
+                                            <constraint firstAttribute="height" constant="164" id="Zmd-ah-JVK"/>
                                             <constraint firstAttribute="trailing" secondItem="fNC-YG-tts" secondAttribute="trailing" constant="20" symbolic="YES" id="jOQ-qk-2dh"/>
                                             <constraint firstItem="9M9-IY-W6g" firstAttribute="top" secondItem="uKE-uZ-V6a" secondAttribute="top" constant="20" symbolic="YES" id="qck-tO-Edo"/>
                                             <constraint firstItem="9M9-IY-W6g" firstAttribute="leading" secondItem="uKE-uZ-V6a" secondAttribute="leading" constant="15" id="vZW-Y2-hSE"/>
                                         </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="WPT-Kb-hBU" appends="YES" id="iTk-ud-uSS"/>
-                                        </connections>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Meb-BW-8CY">
-                                        <rect key="frame" x="0.0" y="220" width="375" height="383"/>
+                                        <rect key="frame" x="0.0" y="228" width="375" height="375"/>
                                         <connections>
                                             <segue destination="rqa-qi-rpz" kind="embed" identifier="dates table" id="esk-1M-e2X"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="god-Wm-J6S" appends="YES" id="vvY-De-eSN"/>
+                                </connections>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -282,7 +308,7 @@
                             <constraint firstAttribute="trailing" secondItem="2RF-9h-zm6" secondAttribute="trailing" id="muc-l1-2bQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="AXW-hv-9VA">
+                    <navigationItem key="navigationItem" title="Details" id="AXW-hv-9VA">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="edit" id="z6i-AH-sHo"/>
                             <barButtonItem systemItem="add" id="5cF-er-ysm">
@@ -293,17 +319,18 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="textField" destination="nSF-DM-dh5" id="ugs-6X-oJf"/>
                         <outlet property="textView" destination="9M9-IY-W6g" id="WWp-zf-xod"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tNH-Zo-Cjr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="WPT-Kb-hBU">
+                <tapGestureRecognizer id="god-Wm-J6S">
                     <connections>
-                        <action selector="dismissKeyboard:" destination="U5k-XT-sQD" id="QBZ-NY-R0x"/>
+                        <action selector="dismissKeyboard:" destination="U5k-XT-sQD" id="FAp-RS-L9F"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3143" y="336"/>
+            <point key="canvasLocation" x="3141.5999999999999" y="335.98200899550227"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YWJ-MF-9Ug">
