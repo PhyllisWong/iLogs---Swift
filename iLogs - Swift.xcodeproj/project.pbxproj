@@ -21,6 +21,7 @@
 		E99CDBFA1F9D27AB00BE2018 /* TimersDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99CDBF91F9D27AB00BE2018 /* TimersDirectoryTableViewController.swift */; };
 		E99CDBFE1F9D27D800BE2018 /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99CDBFD1F9D27D800BE2018 /* UniversalExtentions.swift */; };
 		E99CDC001F9D27F800BE2018 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99CDBFF1F9D27F800BE2018 /* Diary.swift */; };
+		E99CDC021F9D2C4C00BE2018 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */; };
 		E9AA69961F7756ED007F07FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA69951F7756ED007F07FB /* AppDelegate.swift */; };
 		E9AA699B1F7756ED007F07FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AA69991F7756ED007F07FB /* Main.storyboard */; };
 		E9AA69A01F7756ED007F07FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9AA699F1F7756ED007F07FB /* Assets.xcassets */; };
@@ -73,6 +74,7 @@
 		E99CDBFB1F9D27C300BE2018 /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchedResultsTableViewController.swift; path = "../../../../Swift Source Files/FetchedResultsTableViewController.swift"; sourceTree = "<group>"; };
 		E99CDBFD1F9D27D800BE2018 /* UniversalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
 		E99CDBFF1F9D27F800BE2018 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
+		E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		E9AA69921F7756ED007F07FB /* iLogs - Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iLogs - Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AA69951F7756ED007F07FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9AA699A1F7756ED007F07FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				E9AA69C91F77591D007F07FB /* Controllers */,
 				E9AA69CB1F775948007F07FB /* Diary */,
 				E963AFEA1F789A7D0008EDEA /* Timers */,
+				E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */,
 				E9AA69991F7756ED007F07FB /* Main.storyboard */,
 				E9AA69CA1F775935007F07FB /* Supporting Files */,
 			);
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99CDC021F9D2C4C00BE2018 /* TopViewController.swift in Sources */,
 				E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */,
 				E9C9A1CB1F7AE2B000AE55D8 /* DiaryTableViewController.swift in Sources */,
 				E963AFEC1F789D0D0008EDEA /* TimersController.swift in Sources */,
