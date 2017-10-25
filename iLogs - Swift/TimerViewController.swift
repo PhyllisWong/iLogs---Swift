@@ -157,15 +157,15 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         super.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
-        
-        tableView.customCellForRow(at: indexPath)?.refreshTimer?.invalidate()
-        
-        //update the row above the deleting row to update the time between the
-        //new adjacent rows
-        if indexPath.row != 0 {
-            let adjacentIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
-            tableView.reloadRows(at: [adjacentIndexPath], with: .automatic)
-        }
+        // TODO: Update rows when the last row is deleted
+//        tableView.customCellForRow(at: indexPath)?.refreshTimer?.invalidate()
+//        
+//        //update the row above the deleting row to update the time between the
+//        //new adjacent rows
+//        if indexPath.row != 0 {
+//            let adjacentIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+//            tableView.reloadRows(at: [adjacentIndexPath], with: .automatic)
+//        }
     }
     
     // MARK: - IBACTIONS
