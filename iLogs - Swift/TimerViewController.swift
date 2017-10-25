@@ -9,11 +9,29 @@
 import UIKit
 import CoreData
 
-class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class TimerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     var timer: iLogs___Swift.Timer!
     
     private let controller = AppDelegate.sharedInstance.timersController
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var refreshTimer: UIKit.Timer?
+    
+    var fetchedResultsController: NSFetchedResultsController<NSManagedObject>! {
+        didSet {
+            if let controller = fetchedResultsController {
+                controller.delegate = self
+                do {
+                    try controller.performFetch()
+                } catch {
+                    print(error.localizedDescription)
+                }
+                tableView.reloadData()
+            }
+        }
+    }
     
     @IBOutlet private weak var textView: UITextView! {
         didSet {
@@ -28,6 +46,33 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     }
     
     // MARK: - RETURN VALUES
+    
+    // MARK: Table View
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Time Stamps"
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let timeStamp = fetchedResultsController.timeStamp(at: indexPath)
+        let cell: CustomTableViewCell
+        
+        //Last time stamp in collection thus show initial cell
+        if timeStamp == fetchedResultsController.fetchedObjects!.last! {
+            cell = tableView.dequeueReusableCustomCell(withIdentifier: "initial", for: indexPath)
+            let stamp = timeStamp.timeStamp! as Date
+            cell.config(timeStamp: stamp)
+        } else {
+            cell = tableView.dequeueReusableCustomCell(withIdentifier: "extended", for: indexPath)
+            let adjacentIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            let adjacentTimeStamp = fetchedResultsController.timeStamp(at: adjacentIndexPath)
+            let stamp = timeStamp.timeStamp! as Date
+            let adjacentStamp = adjacentTimeStamp.timeStamp as Date?
+            cell.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
+        }
+        
+        return cell
+    }
     
     // MARK: Text Field Delegate
     
@@ -52,16 +97,15 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     
     // MARK: - VOID METHODS
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case "dates table": //Initalize the embedded view
-                let viewVC = segue.destination as! TimerFetchedRequestTableViewController
-                viewVC.timer = timer
-            default:
-                break
-            }
-        }
+    private func updateUI() {
+        let fetch: NSFetchRequest<TimeStamp> = TimeStamp.fetchRequest()
+        fetch.predicate = NSPredicate(format: "timer = %@", timer)
+        fetch.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: false)]
+        fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
+            fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
+            managedObjectContext: AppDelegate.timersViewContext,
+            sectionNameKeyPath: nil, cacheName: nil
+        )
     }
     
     // MARK: Text View Delegate
@@ -94,90 +138,11 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         
         self.navigationItem.rightBarButtonItem = editButtonItem
     }
-
-}
-
-//
-//  Timer Fetched Request Table View Controller
-//
-
-class TimerFetchedRequestTableViewController: FetchedResultsTableViewController {
     
-    fileprivate var timer: iLogs___Swift.Timer! {
-        didSet {
-            updateUI()
-        }
-    }
-    
-    private var refreshTimer: UIKit.Timer?
-    
-    private let controller = AppDelegate.sharedInstance.timersController
-    
-    // MARK: - RETURN VALUES
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Time Stamps"
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let timeStamp = fetchedResultsController.timeStamp(at: indexPath)
-        let cell: CustomTableViewCell
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        //Last time stamp in collection thus show initial cell
-        if timeStamp == fetchedResultsController.fetchedObjects!.last! {
-            cell = tableView.dequeueReusableCustomCell(withIdentifier: "initial", for: indexPath)
-            let stamp = timeStamp.timeStamp! as Date
-            cell.config(timeStamp: stamp)
-        } else {
-            cell = tableView.dequeueReusableCustomCell(withIdentifier: "extended", for: indexPath)
-            let adjacentIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-            let adjacentTimeStamp = fetchedResultsController.timeStamp(at: adjacentIndexPath)
-            let stamp = timeStamp.timeStamp! as Date
-            let adjacentStamp = adjacentTimeStamp.timeStamp as Date?
-            cell.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
-        }
-        
-        return cell
-    }
-    
-    // MARK: - VOID METHODS
-    
-    private func updateUI() {
-        let fetch: NSFetchRequest<TimeStamp> = TimeStamp.fetchRequest()
-        fetch.predicate = NSPredicate(format: "timer = %@", timer)
-        fetch.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: false)]
-        fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
-            fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
-            managedObjectContext: AppDelegate.timersViewContext,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
-    }
-    
-    // MARK: Fetched Results Controller Delegate
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        super.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
-        
-        tableView.customCellForRow(at: indexPath)?.refreshTimer?.invalidate()
-        
-        //update the row above the deleting row to update the time between the
-        //new adjacent rows
-        if indexPath.row != 0 {
-            let adjacentIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
-            tableView.reloadRows(at: [adjacentIndexPath], with: .automatic)
-        }
-    }
-    
-    // MARK: - IBACTIONS
-    
-    // MARK: - LIFE CYCLE
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        saveHandler = controller.saveContext
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 78
+        updateUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -195,7 +160,62 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         
         refreshTimer?.invalidate()
     }
+}
+
+extension TimerViewController {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert: tableView.insertSections([sectionIndex], with: .fade)
+        case .delete: tableView.deleteSections([sectionIndex], with: .fade)
+        default: break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    // MARK: Fetched Results Controller Delegate
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let row = fetchedResultsController.object(at: indexPath)
+            let context = row.managedObjectContext!
+            context.delete(row)
+            AppDelegate.sharedInstance.timersController.saveContext()
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
 }
 
 extension CustomTableViewCell {
