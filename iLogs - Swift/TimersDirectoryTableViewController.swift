@@ -46,8 +46,17 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         if let identifier = segue.identifier {
             switch identifier {
             case "show directory":
+                let vc = segue.destination as! TimersDirectoryTableViewController
+                let indexPath = sender as! IndexPath
+                let directory = fetchedResultsController.directory(at: indexPath)
+                vc.currentDirectory = directory
+            case "show collection":
+//                let vc = segue.destination as! UIViewController
+//                let indexPath = sender as! IndexPath
+//                let directory = fetchedResultsController.directory(at: indexPath)
+//                vc.currentDirectory = directory
                 break
-            case "show timer":
+            case "show timer": // TODO: refactor timer to moment
                 let vc = segue.destination as! TimerViewController
                 let indexPath = sender as! IndexPath
                 let directory = fetchedResultsController.directory(at: indexPath)
@@ -61,14 +70,24 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
     // MARK: Table View Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: check what cell was tapped, timer or a folder
-        // self.performSegue(withIdentifier: "show timer", sender: indexPath)
+        let directory = fetchedResultsController.directory(at: indexPath)
+        switch directory.info {
+        case is iLogs___Swift.Timer:
+            self.performSegue(withIdentifier: "show timer", sender: indexPath)
+        case is Moment:
+            break
+        case is CollectionGroup:
+            self.performSegue(withIdentifier: "show collection", sender: indexPath)
+        case is Folder:
+            self.performSegue(withIdentifier: "show directory", sender: indexPath)
+        default:
+            fatalError("Directory.info type not handled")
+        }
     }
     
     // MARK: - IBACTIONS
     
-    //add folder, moment, timer
-    //add collection group
+    // TDOD: add collection group
     @IBAction func pressAdd(_ sender: UIBarButtonItem) {
         let alertAdd = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -110,6 +129,8 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         AppDelegate.sharedInstance.dismissableViewControllers.insert(self)
         
         updateUI()
+        
+        title = currentDirectory?.info!.title ?? "Root"
     }
 
 }

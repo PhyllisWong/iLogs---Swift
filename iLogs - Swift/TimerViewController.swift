@@ -74,7 +74,7 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     // MARK: - IBACTIONS
     
     @IBAction private func pressAdd(_ sender: Any) {
-        _ = TimeStamp(type: .Start, timer: timer, in: AppDelegate.timersViewContext)
+        TimeStamp(type: .Start, timer: timer, in: AppDelegate.timersViewContext)
         controller.saveContext()
     }
     
@@ -144,8 +144,8 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     
     private func updateUI() {
         let fetch: NSFetchRequest<TimeStamp> = TimeStamp.fetchRequest()
-        fetch.predicate = NSPredicate(format: "timer = %@", timer)
-        fetch.sortDescriptors = [NSSortDescriptor(key: "timeStamp", ascending: false)]
+        fetch.predicate = NSPredicate(format: "owner = %@", timer)
+        fetch.sortDescriptors = [NSSortDescriptor(key: "stamp", ascending: false)]
         fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
             fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
             managedObjectContext: AppDelegate.timersViewContext,

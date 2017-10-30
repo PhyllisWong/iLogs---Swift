@@ -26,10 +26,11 @@ extension NSFetchedResultsController {
 
 extension TimeStamp {
     enum Types: Int16 {
-        case Start
-        case Pause
+        case Start = 1
+        case Pause = 2
     }
     
+    @discardableResult
     convenience init(type: Types = .Start, timeStamp date: Date = Date(), timer: iLogs___Swift.Timer, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         

@@ -16,6 +16,7 @@ extension Directory {
         self.init(context: context)
         
         self.info = info
+        self.parent = parent
     }
 }
 

@@ -15,7 +15,7 @@
         <!--Root-->
         <scene sceneID="YsG-YX-pqL">
             <objects>
-                <tableViewController storyboardIdentifier="timerVC" id="e2U-Zd-h9G" customClass="TimersDirectoryTableViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="directoryVC" id="e2U-Zd-h9G" customClass="TimersDirectoryTableViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zqr-Fx-idc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,11 +63,21 @@
                     </navigationItem>
                     <connections>
                         <segue destination="U5k-XT-sQD" kind="show" identifier="show timer" id="LhP-ma-lf1"/>
+                        <segue destination="1PR-WP-iFp" kind="show" identifier="show directory" id="uOe-Ne-I9n"/>
+                        <segue destination="l2D-0R-GMl" kind="show" identifier="show collection" id="Yxe-fL-WUp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4I-D9-EYR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="593" y="337"/>
+        </scene>
+        <!--directoryVC-->
+        <scene sceneID="ubU-AJ-j5I">
+            <objects>
+                <viewControllerPlaceholder referencedIdentifier="directoryVC" id="1PR-WP-iFp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xKr-ID-RTm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1366" y="-67"/>
         </scene>
         <!--Timer Fetched Request Table View Controller-->
         <scene sceneID="qGD-AS-Qta">
@@ -330,6 +340,24 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1582" y="337"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="a2G-UZ-pub">
+            <objects>
+                <viewController id="l2D-0R-GMl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4zI-5H-i9Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="O4N-wL-dDq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xkm-12-bjv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vrf-OE-gpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1582" y="1078"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YWJ-MF-9Ug">
