@@ -126,14 +126,14 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         //Last time stamp in collection thus show initial cell
         if timeStamp == fetchedResultsController.fetchedObjects!.last! {
             cell = tableView.dequeueReusableCustomCell(withIdentifier: "initial", for: indexPath)
-            let stamp = timeStamp.timeStamp! as Date
+            let stamp = timeStamp.stamp! as Date
             cell.config(timeStamp: stamp)
         } else {
             cell = tableView.dequeueReusableCustomCell(withIdentifier: "extended", for: indexPath)
             let adjacentIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
             let adjacentTimeStamp = fetchedResultsController.timeStamp(at: adjacentIndexPath)
-            let stamp = timeStamp.timeStamp! as Date
-            let adjacentStamp = adjacentTimeStamp.timeStamp as Date?
+            let stamp = timeStamp.stamp! as Date
+            let adjacentStamp = adjacentTimeStamp.stamp as Date?
             cell.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
         }
         
@@ -200,6 +200,7 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
 
 extension CustomTableViewCell {
     
+    /** set the cell's view based on what is available; not nil */
     fileprivate func config(timeStamp: Date, forExtendedCell adjacentTimeStamp: Date? = nil) {
         self.labelTitle?.text = String(timeStamp, dateStyle: .full, timeStyle: .medium)
         self.labelSubtitle?.text = String(timeStamp.timeIntervalSinceNow)

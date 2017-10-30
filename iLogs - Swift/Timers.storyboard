@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Timers-->
+        <!--Root-->
         <scene sceneID="YsG-YX-pqL">
             <objects>
                 <tableViewController storyboardIdentifier="timerVC" id="e2U-Zd-h9G" customClass="TimersDirectoryTableViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="e2U-Zd-h9G" id="rD6-K5-3u9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Timers" id="G20-pM-NMv">
+                    <navigationItem key="navigationItem" title="Root" id="G20-pM-NMv">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="edit" id="55u-yz-avN"/>
                             <barButtonItem systemItem="add" id="frS-y0-BjK">

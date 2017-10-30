@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CollectionGroups" representedClassName="CollectionGroup" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class">
+        <relationship name="instances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Collections" inverseName="collectionGroup" inverseEntity="Collections" syncable="YES"/>
+    </entity>
+    <entity name="Collections" representedClassName="Collection" syncable="YES" codeGenerationType="class">
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="collectionGroup" maxCount="1" deletionRule="Nullify" destinationEntity="CollectionGroups" inverseName="instances" inverseEntity="CollectionGroups" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Moments" inverseName="collection" inverseEntity="Moments" syncable="YES"/>
+    </entity>
     <entity name="Directories" representedClassName="Directory" syncable="YES" codeGenerationType="class">
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Directories" inverseName="parent" inverseEntity="Directories" syncable="YES"/>
         <relationship name="info" maxCount="1" deletionRule="Cascade" destinationEntity="DirectoryInfos" inverseName="directory" inverseEntity="DirectoryInfos" syncable="YES"/>
@@ -7,24 +16,32 @@
     </entity>
     <entity name="DirectoryInfos" representedClassName="DirectoryInfo" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="directory" maxCount="1" deletionRule="Cascade" destinationEntity="Directories" inverseName="info" inverseEntity="Directories" syncable="YES"/>
     </entity>
     <entity name="Folders" representedClassName="Folder" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class"/>
-    <entity name="Timers" representedClassName="Timer" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class">
-        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="timeStamps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TimeStamps" inverseName="timer" inverseEntity="TimeStamps" syncable="YES"/>
+    <entity name="Moments" representedClassName="Moments" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class">
+        <relationship name="collection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Collections" inverseName="items" inverseEntity="Collections" syncable="YES"/>
+        <relationship name="stamps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TimeStamps" inverseName="owner" inverseEntity="TimeStamps" syncable="YES"/>
+    </entity>
+    <entity name="Timers" representedClassName="Timer" parentEntity="Moments" syncable="YES" codeGenerationType="class">
+        <attribute name="timerValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="TimeStamps" representedClassName="TimeStamp" syncable="YES" codeGenerationType="class">
-        <attribute name="stampValue" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="timeStamp" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="timer" maxCount="1" deletionRule="Nullify" destinationEntity="Timers" inverseName="timeStamps" inverseEntity="Timers" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stamp" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="type" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Moments" inverseName="stamps" inverseEntity="Moments" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Directories" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="DirectoryInfos" positionX="-18" positionY="54" width="128" height="90"/>
-        <element name="Folders" positionX="-54" positionY="18" width="128" height="45"/>
-        <element name="Timers" positionX="-36" positionY="27" width="128" height="75"/>
-        <element name="TimeStamps" positionX="0" positionY="72" width="128" height="90"/>
+        <element name="Directories" positionX="-315" positionY="-171" width="128" height="90"/>
+        <element name="DirectoryInfos" positionX="-135" positionY="93" width="128" height="105"/>
+        <element name="Folders" positionX="-90" positionY="36" width="128" height="45"/>
+        <element name="Timers" positionX="-65" positionY="-198" width="128" height="60"/>
+        <element name="TimeStamps" positionX="144" positionY="-72" width="128" height="105"/>
+        <element name="Moments" positionX="-92" positionY="-120" width="128" height="73"/>
+        <element name="Collections" positionX="162" positionY="-198" width="128" height="105"/>
+        <element name="CollectionGroups" positionX="-90" positionY="-36" width="128" height="60"/>
     </elements>
 </model>

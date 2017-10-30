@@ -35,15 +35,15 @@ extension NSFetchedResultsController {
 extension TimeStamp {
     enum Types: Int16 {
         case Start
-        case Stop
+        case Pause
     }
     
-    convenience init(type: Types, timeStamp date: Date = Date(), timer: iLogs___Swift.Timer, `in` context: NSManagedObjectContext) {
+    convenience init(type: Types = .Start, timeStamp date: Date = Date(), timer: iLogs___Swift.Timer, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         
-        self.timeStamp = date as NSDate
-        self.timer = timer
-        self.stampValue = type.rawValue
+        self.stamp = date as NSDate
+        self.owner = timer
+        self.type = type.rawValue
     }
 }
 

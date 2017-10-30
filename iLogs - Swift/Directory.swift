@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 
 extension Directory {
+    
+    @discardableResult
     convenience init(info: DirectoryInfo, parent: Directory?, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         
