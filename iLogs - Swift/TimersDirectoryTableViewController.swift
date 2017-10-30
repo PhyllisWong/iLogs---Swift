@@ -18,8 +18,9 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let row = fetchedResultsController.directory(at: indexPath)
-        cell.textLabel!.text = row.info!.title
+        let directory = fetchedResultsController.directory(at: indexPath)
+        cell.textLabel!.text = directory.info!.title
+        cell.detailTextLabel!.text = String(directory)
         
         return cell
     }
@@ -61,14 +62,42 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: check what cell was tapped, timer or a folder
-        self.performSegue(withIdentifier: "show timer", sender: indexPath)
+        // self.performSegue(withIdentifier: "show timer", sender: indexPath)
     }
     
     // MARK: - IBACTIONS
     
+    //add folder, moment, timer
+    //add collection group
     @IBAction func pressAdd(_ sender: UIBarButtonItem) {
-        _ = iLogs___Swift.Timer(title: "Untitled", parent: currentDirectory, in: AppDelegate.timersViewContext)
-        AppDelegate.sharedInstance.timersController.saveContext()
+        let alertAdd = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        func addAction(actionTitle: String, alertTitle: String, alertMessage: String, complitionHandler handler: @escaping (String) -> Void) {
+            alertAdd.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { [weak self] (action) in
+                let alertTitle = UITextAlertController(title: alertTitle, message: alertMessage)
+                alertTitle.addConfirmAction(action: UIAlertAction(title: "Add", style: .default, handler: { (action) in
+                    let title = alertTitle.inputField.text!
+                    handler(title)
+                    AppDelegate.sharedInstance.timersController.saveContext()
+                }))
+                self?.present(alertTitle, animated: true)
+            }))
+        }
+        
+        addAction(actionTitle: "Folder", alertTitle: "Add a Folder", alertMessage: "enter a title", complitionHandler: { [weak self] title in
+            Folder(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
+        })
+        addAction(actionTitle: "Collection", alertTitle: "Add a Collection", alertMessage: "enter a title", complitionHandler: { [weak self] title in
+            CollectionGroup(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
+        })
+        addAction(actionTitle: "Moment", alertTitle: "Add a Moment", alertMessage: "enter a title", complitionHandler: { [weak self] title in
+            Moment(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
+        })
+        addAction(actionTitle: "Timer", alertTitle: "Add a Timer", alertMessage: "enter a title", complitionHandler: { [weak self] title in
+            Timer(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
+        })
+        alertAdd.addDismissAction()
+        self.present(alertAdd, animated: true)
     }
     
     // MARK: - LIFE CYCLE

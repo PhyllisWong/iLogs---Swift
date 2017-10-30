@@ -10,14 +10,6 @@ import Foundation
 import CoreData
 
 extension iLogs___Swift.Timer {
-    convenience init(title: String, dateCreated date: Date = Date(), parent: Directory?, `in` context: NSManagedObjectContext) {
-        self.init(context: context)
-        
-        self.title = title
-        self.dateCreated = date as NSDate
-        
-        _ = Directory(info: self, parent: parent, in: context)
-    }
 }
 
 extension Directory {
@@ -29,26 +21,5 @@ extension Directory {
 extension NSFetchedResultsController {
     func timer(at indexPath: IndexPath) -> iLogs___Swift.Timer {
         return self.object(at: indexPath) as! iLogs___Swift.Timer
-    }
-}
-
-extension TimeStamp {
-    enum Types: Int16 {
-        case Start
-        case Pause
-    }
-    
-    convenience init(type: Types = .Start, timeStamp date: Date = Date(), timer: iLogs___Swift.Timer, `in` context: NSManagedObjectContext) {
-        self.init(context: context)
-        
-        self.stamp = date as NSDate
-        self.owner = timer
-        self.type = type.rawValue
-    }
-}
-
-extension NSFetchedResultsController {
-    func timeStamp(at indexPath: IndexPath) -> TimeStamp {
-        return self.object(at: indexPath) as! TimeStamp
     }
 }

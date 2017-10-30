@@ -21,7 +21,7 @@
         <relationship name="directory" maxCount="1" deletionRule="Cascade" destinationEntity="Directories" inverseName="info" inverseEntity="Directories" syncable="YES"/>
     </entity>
     <entity name="Folders" representedClassName="Folder" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class"/>
-    <entity name="Moments" representedClassName="Moments" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class">
+    <entity name="Moments" representedClassName="Moment" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class">
         <relationship name="collection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Collections" inverseName="items" inverseEntity="Collections" syncable="YES"/>
         <relationship name="stamps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TimeStamps" inverseName="owner" inverseEntity="TimeStamps" syncable="YES"/>
     </entity>
