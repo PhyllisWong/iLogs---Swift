@@ -56,11 +56,11 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
 //                let directory = fetchedResultsController.directory(at: indexPath)
 //                vc.currentDirectory = directory
                 break
-            case "show timer": // TODO: refactor timer to moment
-                let vc = segue.destination as! TimerViewController
+            case "show moment": // TODO: refactor timer to moment
+                let vc = segue.destination as! MomentViewController
                 let indexPath = sender as! IndexPath
                 let directory = fetchedResultsController.directory(at: indexPath)
-                vc.timer = directory.timer
+                vc.moment = directory.moment
             default:
                 break
             }
@@ -72,10 +72,8 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let directory = fetchedResultsController.directory(at: indexPath)
         switch directory.info {
-        case is iLogs___Swift.Timer:
-            self.performSegue(withIdentifier: "show timer", sender: indexPath)
-        case is Moment:
-            break
+        case is StopWatch, is Moment:
+            self.performSegue(withIdentifier: "show moment", sender: indexPath)
         case is CollectionGroup:
             self.performSegue(withIdentifier: "show collection", sender: indexPath)
         case is Folder:
@@ -113,7 +111,7 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
             Moment(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
         })
         addAction(actionTitle: "Timer", alertTitle: "Add a Timer", alertMessage: "enter a title", complitionHandler: { [weak self] title in
-            Timer(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
+            StopWatch(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
         })
         alertAdd.addDismissAction()
         self.present(alertAdd, animated: true)

@@ -24,8 +24,8 @@ extension String {
     init(_ directory: Directory) {
         let info = directory.info!
         switch info {
-        case is Timer:
-            self.init("I am a timer")!
+        case is StopWatch:
+            self.init("I am a Stop Watch")!
         case is Moment:
             self.init("I am a Moment")!
         case is CollectionGroup:

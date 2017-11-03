@@ -9,22 +9,32 @@
 import UIKit
 import CoreData
 
-class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class MomentViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
-    var timer: iLogs___Swift.Timer!
+    var moment: Moment!
     
     private let controller = AppDelegate.sharedInstance.timersController
     
     @IBOutlet private weak var textView: UITextView! {
         didSet {
-            textView.text = timer.notes
+            textView.text = moment.notes
         }
     }
     
     @IBOutlet weak var textField: UITextField! {
         didSet {
-            textField.text = timer.title
+            textField.text = moment.title
         }
+    }
+    
+    @IBOutlet weak var stepperTimeLimit: UIStepper!
+    @IBAction func stepperDidChange(_ sender: Any) {
+        (moment as! StopWatch).time
+    }
+    
+    @IBOutlet weak var buttonTimeLimit: UIButton!
+    @IBAction func pressTimeLimit(_ sender: Any) {
+        
     }
     
     // MARK: - RETURN VALUES
@@ -38,7 +48,7 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        timer.title = textField.text
+        moment.title = textField.text
         controller.saveContext()
     }
     
@@ -57,7 +67,7 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
             switch identifier {
             case "dates table": //Initalize the embedded view
                 let viewVC = segue.destination as! TimerFetchedRequestTableViewController
-                viewVC.timer = timer
+                viewVC.moment = moment
             default:
                 break
             }
@@ -67,14 +77,24 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
     // MARK: Text View Delegate
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        timer.notes = textView.text
+        moment.notes = textView.text
         controller.saveContext()
     }
     
     // MARK: - IBACTIONS
     
     @IBAction private func pressAdd(_ sender: Any) {
-        TimeStamp(type: .Start, timer: timer, in: AppDelegate.timersViewContext)
+        let type: TimeStamp.Types
+        if moment.isStopWatch {
+            if let lastStamp = moment.sortedStamps?.first {
+                type = lastStamp.type == .Start ? .Pause : .Start
+            } else {
+                type = .Start
+            }
+        } else {
+            type = .Start
+        }
+        TimeStamp(type: type, moment: moment, in: AppDelegate.timersViewContext)
         controller.saveContext()
     }
     
@@ -94,6 +114,12 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         
         self.navigationItem.rightBarButtonItem = editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.title = moment.isStopWatch ? "Stop Watch" : "Moment"
+    }
 
 }
 
@@ -103,7 +129,7 @@ class TimerViewController: UIViewController, UITextFieldDelegate, UITextViewDele
 
 class TimerFetchedRequestTableViewController: FetchedResultsTableViewController {
     
-    fileprivate var timer: iLogs___Swift.Timer! {
+    fileprivate var moment: Moment! {
         didSet {
             updateUI()
         }
@@ -123,18 +149,24 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         let timeStamp = fetchedResultsController.timeStamp(at: indexPath)
         let cell: CustomTableViewCell
         
-        //Last time stamp in collection thus show initial cell
-        if timeStamp == fetchedResultsController.fetchedObjects!.last! {
-            cell = tableView.dequeueReusableCustomCell(withIdentifier: "initial", for: indexPath)
-            let stamp = timeStamp.stamp! as Date
-            cell.config(timeStamp: stamp)
+        if moment.isStopWatch {
+            //Last time stamp in collection thus show initial cell
+            if timeStamp == fetchedResultsController.fetchedObjects!.last! {
+                cell = tableView.dequeueReusableCustomCell(withIdentifier: "initial", for: indexPath)
+                let stamp = timeStamp.stamp! as Date
+                cell.config(timeStamp: stamp)
+            } else {
+                cell = tableView.dequeueReusableCustomCell(withIdentifier: "extended", for: indexPath)
+                let adjacentIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+                let adjacentTimeStamp = fetchedResultsController.timeStamp(at: adjacentIndexPath)
+                let stamp = timeStamp.stamp! as Date
+                let adjacentStamp = adjacentTimeStamp.stamp as Date?
+                cell.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
+            }
         } else {
-            cell = tableView.dequeueReusableCustomCell(withIdentifier: "extended", for: indexPath)
-            let adjacentIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-            let adjacentTimeStamp = fetchedResultsController.timeStamp(at: adjacentIndexPath)
-            let stamp = timeStamp.stamp! as Date
-            let adjacentStamp = adjacentTimeStamp.stamp as Date?
-            cell.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
+            cell = tableView.dequeueReusableCustomCell(withIdentifier: "cell", for: indexPath)
+            let stamp = fetchedResultsController.timeStamp(at: indexPath)
+            cell.config(timeStamp: stamp.stamp! as Date)
         }
         
         return cell
@@ -144,7 +176,7 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     
     private func updateUI() {
         let fetch: NSFetchRequest<TimeStamp> = TimeStamp.fetchRequest()
-        fetch.predicate = NSPredicate(format: "owner = %@", timer)
+        fetch.predicate = NSPredicate(format: "owner = %@", moment)
         fetch.sortDescriptors = [NSSortDescriptor(key: "stamp", ascending: false)]
         fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
             fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
@@ -200,7 +232,7 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
 
 extension CustomTableViewCell {
     
-    /** set the cell's view based on what is available; not nil */
+    /** set the cell's view based on what is available; @IBOutlet labels that are not nil */
     fileprivate func config(timeStamp: Date, forExtendedCell adjacentTimeStamp: Date? = nil) {
         self.labelTitle?.text = String(timeStamp, dateStyle: .full, timeStyle: .medium)
         self.labelSubtitle?.text = String(timeStamp.timeIntervalSinceNow)

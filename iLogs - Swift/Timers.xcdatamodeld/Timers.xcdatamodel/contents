@@ -25,23 +25,23 @@
         <relationship name="collection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Collections" inverseName="items" inverseEntity="Collections" syncable="YES"/>
         <relationship name="stamps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TimeStamps" inverseName="owner" inverseEntity="TimeStamps" syncable="YES"/>
     </entity>
-    <entity name="Timers" representedClassName="Timer" parentEntity="Moments" syncable="YES" codeGenerationType="class">
-        <attribute name="timerValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    <entity name="StopWatches" representedClassName="StopWatch" parentEntity="Moments" syncable="YES" codeGenerationType="class">
+        <attribute name="timeLimit" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="TimeStamps" representedClassName="TimeStamp" syncable="YES" codeGenerationType="class">
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stamp" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="type" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="typeValue" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="owner" maxCount="1" deletionRule="Nullify" destinationEntity="Moments" inverseName="stamps" inverseEntity="Moments" syncable="YES"/>
     </entity>
     <elements>
+        <element name="CollectionGroups" positionX="-90" positionY="-36" width="128" height="60"/>
+        <element name="Collections" positionX="162" positionY="-198" width="128" height="105"/>
         <element name="Directories" positionX="-315" positionY="-171" width="128" height="90"/>
         <element name="DirectoryInfos" positionX="-135" positionY="93" width="128" height="105"/>
         <element name="Folders" positionX="-90" positionY="36" width="128" height="45"/>
-        <element name="Timers" positionX="-65" positionY="-198" width="128" height="60"/>
-        <element name="TimeStamps" positionX="144" positionY="-72" width="128" height="105"/>
-        <element name="Moments" positionX="-92" positionY="-120" width="128" height="73"/>
-        <element name="Collections" positionX="162" positionY="-198" width="128" height="105"/>
-        <element name="CollectionGroups" positionX="-90" positionY="-36" width="128" height="60"/>
+        <element name="Moments" positionX="-92" positionY="-120" width="128" height="28"/>
+        <element name="StopWatches" positionX="-65" positionY="-198" width="128" height="28"/>
+        <element name="TimeStamps" positionX="144" positionY="-72" width="128" height="28"/>
     </elements>
 </model>

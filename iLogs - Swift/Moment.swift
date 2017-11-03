@@ -10,11 +10,15 @@ import Foundation
 import CoreData
 
 extension Moment {
+    
+    var sortedStamps: [TimeStamp]? {
+        return self.stamps?.sortedArray(using: [NSSortDescriptor(key: "stamp", ascending: false)]) as! [TimeStamp]?
+    }
 }
 
 extension Directory {
     var moment: Moment {
-        return self.info! as! Timer
+        return self.info! as! Moment
     }
 }
 
@@ -30,13 +34,17 @@ extension TimeStamp {
         case Pause = 2
     }
     
+    var type: Types {
+        return Types(rawValue: typeValue)!
+    }
+    
     @discardableResult
-    convenience init(type: Types = .Start, timeStamp date: Date = Date(), timer: iLogs___Swift.Timer, `in` context: NSManagedObjectContext) {
+    convenience init(type: Types = .Start, timeStamp date: Date = Date(), moment: Moment, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.stamp = date as NSDate
-        self.owner = timer
-        self.type = type.rawValue
+        self.owner = moment
+        self.typeValue = type.rawValue
     }
 }
 
