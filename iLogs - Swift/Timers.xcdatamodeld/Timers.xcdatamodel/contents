@@ -26,7 +26,7 @@
         <relationship name="stamps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TimeStamps" inverseName="owner" inverseEntity="TimeStamps" syncable="YES"/>
     </entity>
     <entity name="StopWatches" representedClassName="StopWatch" parentEntity="Moments" syncable="YES" codeGenerationType="class">
-        <attribute name="timeLimit" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timeLimitValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="TimeStamps" representedClassName="TimeStamp" syncable="YES" codeGenerationType="class">
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
@@ -41,7 +41,7 @@
         <element name="DirectoryInfos" positionX="-135" positionY="93" width="128" height="105"/>
         <element name="Folders" positionX="-90" positionY="36" width="128" height="45"/>
         <element name="Moments" positionX="-92" positionY="-120" width="128" height="28"/>
-        <element name="StopWatches" positionX="-65" positionY="-198" width="128" height="28"/>
+        <element name="StopWatches" positionX="-65" positionY="-198" width="128" height="60"/>
         <element name="TimeStamps" positionX="144" positionY="-72" width="128" height="28"/>
     </elements>
 </model>

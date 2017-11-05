@@ -27,16 +27,6 @@ class MomentViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         }
     }
     
-    @IBOutlet weak var stepperTimeLimit: UIStepper!
-    @IBAction func stepperDidChange(_ sender: Any) {
-        (moment as! StopWatch).time
-    }
-    
-    @IBOutlet weak var buttonTimeLimit: UIButton!
-    @IBAction func pressTimeLimit(_ sender: Any) {
-        
-    }
-    
     // MARK: - RETURN VALUES
     
     // MARK: Text Field Delegate
@@ -61,6 +51,17 @@ class MomentViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     }
     
     // MARK: - VOID METHODS
+    
+    private func updateUI() {
+        if let stopWatch = moment as? StopWatch {
+            if let _ = stopWatch.timeLimit {
+                buttonTimeLimit.setTitle(String(stopWatch.timeLimit!), for: .normal)
+                stepperTimeLimit.value = Double(stopWatch.timeLimit ?? 0)
+            } else {
+                buttonTimeLimit.setTitle("Not Set", for: .normal)
+            }
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -98,6 +99,43 @@ class MomentViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         controller.saveContext()
     }
     
+    @IBOutlet weak var viewTimeLimit: UIView!
+    @IBOutlet weak var stepperTimeLimit: UIStepper!
+    @IBAction func stepperDidChange(_ sender: Any) {
+        stepperTimeLimit.minimumValue = 1
+        (moment as! StopWatch).timeLimit = TimeInterval(stepperTimeLimit.value)
+        AppDelegate.sharedInstance.timersController.saveContext()
+        updateUI()
+    }
+    
+    @IBOutlet weak var buttonTimeLimit: UIButton!
+    @IBAction func pressTimeLimit(_ sender: Any) {
+        let stopWatch = moment as! StopWatch
+        let alertTimeLimit = UITextAlertController(title: "Time Limit", message: "enter a time limit") { (textField) in
+            textField.placeholder = "minutes"
+            textField.keyboardType = .numberPad
+        }
+        alertTimeLimit.addAction(UIAlertAction(title: "Set", style: .default, handler: { [weak self] (action) in
+            let timeLimit = TimeInterval(alertTimeLimit.inputField.text!)! // TODO : Custom number pad for time inputs
+            stopWatch.timeLimit = timeLimit * 60
+            AppDelegate.sharedInstance.timersController.saveContext()
+            self?.updateUI()
+        }))
+        
+        // only if a time limit already exists
+        if stopWatch.timeLimit != nil {
+            alertTimeLimit.addAction(UIAlertAction(title: "Remove", style: .destructive, handler: { [weak self] (action) in
+                stopWatch.timeLimit = nil //TODO : Fix stepper being set to 1
+                self?.stepperTimeLimit.minimumValue = 0
+                self?.stepperTimeLimit.value = 0
+                AppDelegate.sharedInstance.timersController.saveContext()
+                self?.updateUI()
+            }))
+        }
+        alertTimeLimit.addDismissAction()
+        self.present(alertTimeLimit, animated: true)
+    }
+    
     @IBAction private func dismissKeyboard(_ sender: Any) {
         if textView.isFirstResponder {
             textView.resignFirstResponder()
@@ -115,10 +153,18 @@ class MomentViewController: UIViewController, UITextFieldDelegate, UITextViewDel
         self.navigationItem.rightBarButtonItem = editButtonItem
     }
     
+    override func viewDidLayoutSubviews() {
+        if moment.isStopWatch == false {
+            viewTimeLimit?.removeFromSuperview()
+        }
+        
+        self.title = moment.isStopWatch ? "Stop Watch" : "Moment"
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.title = moment.isStopWatch ? "Stop Watch" : "Moment"
+        updateUI()
     }
 
 }
@@ -135,22 +181,45 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         }
     }
     
+    //TODO : auto update the table on changes
+    private var fetchedObjects: [TimeStamp]? {
+        return fetchedResultsController?.fetchedObjects as! [TimeStamp]?
+    }
+    
     private var refreshTimer: UIKit.Timer?
     
     private let controller = AppDelegate.sharedInstance.timersController
     
     // MARK: - RETURN VALUES
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if moment.isStopWatch {
+            if let nObjects = fetchedObjects?.count {
+                return Int(ceil(Double(Double(nObjects) / 2.0)))
+            } else {
+                return 0
+            }
+        } else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Time Stamps"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let timeStamp = fetchedResultsController.timeStamp(at: indexPath)
         let cell: CustomTableViewCell
         
         if moment.isStopWatch {
-            //Last time stamp in collection thus show initial cell
+            cell = tableView.dequeueReusableCustomCell(withIdentifier: "cell", for: indexPath)
+            let boundedStamps = fetchedObjects!.at(indexPath)
+            let lowerStamp = boundedStamps.lowerStamp
+            let higherStamp = boundedStamps.upperStamp
+            cell.config(lowerStamp: lowerStamp, higherStamp: higherStamp)
+        } else {
+            let timeStamp = fetchedResultsController.timeStamp(at: indexPath)
+            //The tast time stamp in collection thus show initial cell
             if timeStamp == fetchedResultsController.fetchedObjects!.last! {
                 cell = tableView.dequeueReusableCustomCell(withIdentifier: "initial", for: indexPath)
                 let stamp = timeStamp.stamp! as Date
@@ -163,10 +232,6 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
                 let adjacentStamp = adjacentTimeStamp.stamp as Date?
                 cell.config(timeStamp: stamp, forExtendedCell: adjacentStamp)
             }
-        } else {
-            cell = tableView.dequeueReusableCustomCell(withIdentifier: "cell", for: indexPath)
-            let stamp = fetchedResultsController.timeStamp(at: indexPath)
-            cell.config(timeStamp: stamp.stamp! as Date)
         }
         
         return cell
@@ -187,8 +252,49 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     
     // MARK: Fetched Results Controller Delegate
     
+    override func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData() // TODO : update using the fetched results controller
+    }
+    
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+//        switch type {
+//        case .insert: tableView.insertSections([sectionIndex], with: .fade)
+//        case .delete: tableView.deleteSections([sectionIndex], with: .fade)
+//        default: break
+//        }
+    }
+    
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        switch type {
+//        case .insert:
+//            tableView.insertRows(at: [newIndexPath!], with: .fade)
+//        case .delete:
+//            tableView.deleteRows(at: [indexPath!], with: .fade)
+//        case .update:
+//            tableView.reloadRows(at: [indexPath!], with: .fade)
+//        case .move:
+//            tableView.deleteRows(at: [indexPath!], with: .fade)
+//            tableView.insertRows(at: [newIndexPath!], with: .fade)
+//        }
+    }
+    
+    override func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        //tableView.endUpdates()
+    }
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        super.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
+        if moment.isStopWatch {
+            let timeStamps = fetchedObjects!.at(indexPath)
+            let context = AppDelegate.timersViewContext
+            context.delete(timeStamps.lowerStamp)
+            if let upperStamp = timeStamps.upperStamp {
+                context.delete(upperStamp)
+            }
+            AppDelegate.sharedInstance.timersController.saveContext()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        } else {
+            super.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
+        }
         // TODO: Update rows when the last row is deleted
 //        tableView.customCellForRow(at: indexPath)?.refreshTimer?.invalidate()
 //        
@@ -230,6 +336,31 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     
 }
 
+extension Array {
+    
+    /**
+     returns the tuple of and index path's row, the stamp at the row and an
+     optional upper stamp depending on the count of the array
+     */
+    fileprivate func at(_ indexPath: IndexPath) -> (lowerStamp: TimeStamp, upperStamp: TimeStamp?) {
+        let index: Int
+        if self.count % 2 == 0 {
+            index = indexPath.row * 2
+        } else {
+            index = Swift.max(0, indexPath.row * 2 - 1)
+        }
+        let lower = self[index] as! TimeStamp
+        let upper: TimeStamp?
+        if index == 0 {
+            upper = self.count % 2 == 0 ? (self[index + 1] as! TimeStamp) : nil
+        } else {
+            upper = (self[index + 1] as! TimeStamp)
+        }
+        
+        return (lower,upper)
+    }
+}
+
 extension CustomTableViewCell {
     
     /** set the cell's view based on what is available; @IBOutlet labels that are not nil */
@@ -239,6 +370,21 @@ extension CustomTableViewCell {
         if adjacentTimeStamp != nil {
             let interval = timeStamp.timeIntervalSince(adjacentTimeStamp!)
             self.labelCaption?.text = String(interval)
+        }
+    }
+    
+    /** set the cell's view based on what is available; @IBOutlet labels that are not nil */
+    fileprivate func config(lowerStamp: TimeStamp, higherStamp: TimeStamp?) {
+        self.labelTitle.text = String(lowerStamp.stamp!, dateStyle: .full)
+        self.labelCaption.text = String(lowerStamp.stamp!, dateStyle: .none, timeStyle: .medium)
+        if let _ = higherStamp {
+            self.labelCaption2.text = String(higherStamp!.stamp!, dateStyle: .none, timeStyle: .medium)
+            let variance = higherStamp!.stamp!.timeIntervalSince(lowerStamp.stamp! as Date)
+            self.labelSubtitle.text = String(variance)
+        } else {
+            self.labelCaption2.text = "now"
+            let variance = Date().timeIntervalSince(lowerStamp.stamp! as Date)
+            self.labelSubtitle.text = String(variance)
         }
     }
 }
