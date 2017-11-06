@@ -344,17 +344,21 @@ extension Array {
      */
     fileprivate func at(_ indexPath: IndexPath) -> (lowerStamp: TimeStamp, upperStamp: TimeStamp?) {
         let index: Int
-        if self.count % 2 == 0 {
-            index = indexPath.row * 2
+        if self.count.isEven {
+            index = indexPath.row * 2 + 1
         } else {
-            index = Swift.max(0, indexPath.row * 2 - 1)
+            index = indexPath.row * 2
         }
         let lower = self[index] as! TimeStamp
         let upper: TimeStamp?
         if index == 0 {
-            upper = self.count % 2 == 0 ? (self[index + 1] as! TimeStamp) : nil
+            if self.count.isEven {
+                upper = .some(self[index - 1] as! TimeStamp)
+            } else {
+                upper = nil
+            }
         } else {
-            upper = (self[index + 1] as! TimeStamp)
+            upper = .some(self[index - 1] as! TimeStamp)
         }
         
         return (lower,upper)
@@ -377,9 +381,26 @@ extension CustomTableViewCell {
     fileprivate func config(lowerStamp: TimeStamp, higherStamp: TimeStamp?) {
         self.labelTitle.text = String(lowerStamp.stamp!, dateStyle: .full)
         self.labelCaption.text = String(lowerStamp.stamp!, dateStyle: .none, timeStyle: .medium)
-        if let _ = higherStamp {
-            self.labelCaption2.text = String(higherStamp!.stamp!, dateStyle: .none, timeStyle: .medium)
-            let variance = higherStamp!.stamp!.timeIntervalSince(lowerStamp.stamp! as Date)
+        if let upperStamp = higherStamp {
+            let trailingDay: String // If the two stamps are different days, print the day for the upper stamp
+            let calendar = Calendar.current
+            var lowerDay = DateComponents(date: lowerStamp.stamp! as Date, forComponents: [.day, .month, .year, .weekday, .weekOfYear])
+            lowerDay.calendar = calendar
+            var upperDay = DateComponents(date: upperStamp.stamp! as Date, forComponents: [.day, .month, .year, .weekday, .weekOfYear])
+            upperDay.calendar = calendar
+            if lowerDay == upperDay {
+                trailingDay = ""
+            } else {
+                if lowerDay.weekOfYear! != upperDay.weekOfYear! {
+                    // show month, day and year
+                    trailingDay = String(upperStamp.stamp!, dateStyle: .medium)
+                } else {
+                    // show only weekday
+                    trailingDay = upperDay.weekdayTitle!
+                }
+            }
+            self.labelCaption2.text = "\(String(upperStamp.stamp!, dateStyle: .none, timeStyle: .medium))\n\(trailingDay)"
+            let variance = upperStamp.stamp!.timeIntervalSince(lowerStamp.stamp! as Date)
             self.labelSubtitle.text = String(variance)
         } else {
             self.labelCaption2.text = "now"
