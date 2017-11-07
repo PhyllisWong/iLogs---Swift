@@ -51,11 +51,10 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
                 let directory = fetchedResultsController.directory(at: indexPath)
                 vc.currentDirectory = directory
             case "show collection":
-//                let vc = segue.destination as! UIViewController
-//                let indexPath = sender as! IndexPath
-//                let directory = fetchedResultsController.directory(at: indexPath)
-//                vc.currentDirectory = directory
-                break
+                let vc = segue.destination as! CollectionGroupViewController
+                let indexPath = sender as! IndexPath
+                let directory = fetchedResultsController.directory(at: indexPath)
+                vc.collectionGroup = directory.collectionGroup
             case "show moment": // TODO: refactor timer to moment
                 let vc = segue.destination as! MomentViewController
                 let indexPath = sender as! IndexPath
@@ -110,7 +109,7 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         addAction(actionTitle: "Moment", alertTitle: "Add a Moment", alertMessage: "enter a title", complitionHandler: { [weak self] title in
             Moment(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
         })
-        addAction(actionTitle: "Timer", alertTitle: "Add a Timer", alertMessage: "enter a title", complitionHandler: { [weak self] title in
+        addAction(actionTitle: "Stop Watch", alertTitle: "Add a Stop Watch", alertMessage: "enter a title", complitionHandler: { [weak self] title in
             StopWatch(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
         })
         alertAdd.addDismissAction()

@@ -11,6 +11,15 @@ import CoreData
 
 extension Moment {
     
+    @discardableResult
+    convenience init(blankCopy source: Moment, `in` context: NSManagedObjectContext) {
+        self.init(title: source.title!, parent: source.directory!.parent, in: context)
+        
+        self.dateCreated = NSDate()
+        self.notes = source.notes
+        self.collection = source.collection
+    }
+    
     var sortedStamps: [TimeStamp]? {
         return self.stamps?.sortedArray(using: [NSSortDescriptor(key: "stamp", ascending: false)]) as! [TimeStamp]?
     }
