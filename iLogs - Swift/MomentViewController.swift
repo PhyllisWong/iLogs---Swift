@@ -382,14 +382,14 @@ extension CustomTableViewCell {
         self.labelTitle.text = String(lowerStamp.stamp!, dateStyle: .full)
         self.labelCaption.text = String(lowerStamp.stamp!, dateStyle: .none, timeStyle: .medium)
         if let upperStamp = higherStamp {
-            let trailingDay: String // If the two stamps are different days, print the day for the upper stamp
+            let trailingDay: String? // If the two stamps are different days, print the day for the upper stamp
             let calendar = Calendar.current
             var lowerDay = DateComponents(date: lowerStamp.stamp! as Date, forComponents: [.day, .month, .year, .weekday, .weekOfYear])
             lowerDay.calendar = calendar
             var upperDay = DateComponents(date: upperStamp.stamp! as Date, forComponents: [.day, .month, .year, .weekday, .weekOfYear])
             upperDay.calendar = calendar
             if lowerDay == upperDay {
-                trailingDay = ""
+                trailingDay = nil
             } else {
                 if lowerDay.weekOfYear! != upperDay.weekOfYear! {
                     // show month, day and year
@@ -399,7 +399,7 @@ extension CustomTableViewCell {
                     trailingDay = upperDay.weekdayTitle!
                 }
             }
-            self.labelCaption2.text = "\(String(upperStamp.stamp!, dateStyle: .none, timeStyle: .medium))\n\(trailingDay)"
+            self.labelCaption2.text = String(upperStamp.stamp!, dateStyle: .none, timeStyle: .medium) + (trailingDay != nil ? "\n\(trailingDay!)" : "")
             let variance = upperStamp.stamp!.timeIntervalSince(lowerStamp.stamp! as Date)
             self.labelSubtitle.text = String(variance)
         } else {

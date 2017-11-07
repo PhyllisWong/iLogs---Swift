@@ -181,7 +181,7 @@ class CollectionItemFetchedRequestTableViewController: FetchedResultsTableViewCo
         if instance != nil {
             let fetch: NSFetchRequest<Moment> = Moment.fetchRequest()
             fetch.predicate = NSPredicate(format: "collection = %@", instance!)
-            fetch.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
+            fetch.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true, selector: #selector(NSString.localizedStandardCompare(_:)))]
             fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
                 fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
                 managedObjectContext: AppDelegate.timersViewContext,
