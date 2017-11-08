@@ -213,7 +213,7 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         
         if moment.isStopWatch {
             cell = tableView.dequeueReusableCustomCell(withIdentifier: "cell", for: indexPath)
-            let boundedStamps = fetchedObjects!.at(indexPath)
+            let boundedStamps = fetchedObjects!.at(index: indexPath.row)
             let lowerStamp = boundedStamps.lowerStamp
             let higherStamp = boundedStamps.upperStamp
             cell.config(lowerStamp: lowerStamp, higherStamp: higherStamp)
@@ -284,7 +284,7 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if moment.isStopWatch {
-            let timeStamps = fetchedObjects!.at(indexPath)
+            let timeStamps = fetchedObjects!.at(index: indexPath.row)
             let context = AppDelegate.timersViewContext
             context.delete(timeStamps.lowerStamp)
             if let upperStamp = timeStamps.upperStamp {
@@ -334,35 +334,6 @@ class TimerFetchedRequestTableViewController: FetchedResultsTableViewController 
         refreshTimer?.invalidate()
     }
     
-}
-
-extension Array {
-    
-    /**
-     returns the tuple of and index path's row, the stamp at the row and an
-     optional upper stamp depending on the count of the array
-     */
-    fileprivate func at(_ indexPath: IndexPath) -> (lowerStamp: TimeStamp, upperStamp: TimeStamp?) {
-        let index: Int
-        if self.count.isEven {
-            index = indexPath.row * 2 + 1
-        } else {
-            index = indexPath.row * 2
-        }
-        let lower = self[index] as! TimeStamp
-        let upper: TimeStamp?
-        if index == 0 {
-            if self.count.isEven {
-                upper = .some(self[index - 1] as! TimeStamp)
-            } else {
-                upper = nil
-            }
-        } else {
-            upper = .some(self[index - 1] as! TimeStamp)
-        }
-        
-        return (lower,upper)
-    }
 }
 
 extension CustomTableViewCell {

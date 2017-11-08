@@ -20,8 +20,19 @@ extension Moment {
         self.collection = source.collection
     }
     
+    /**
+     sorts the set stamps by the decending order of the stamp date
+     */
     var sortedStamps: [TimeStamp]? {
         return self.stamps?.sortedArray(using: [NSSortDescriptor(key: "stamp", ascending: false)]) as! [TimeStamp]?
+    }
+    
+    /**
+     since sortedStamps has the most recent stamp at index 0, this will return
+     the first stamp in the sorted array, if available
+     */
+    var lastStamp: TimeStamp? {
+        return sortedStamps?.first
     }
 }
 
@@ -41,6 +52,14 @@ extension TimeStamp {
     enum Types: Int16 {
         case Start = 1
         case Pause = 2
+        
+        mutating func invert() {
+            self = self == .Start ? .Pause : .Start
+        }
+        
+        var inverse: Types {
+            return self == .Start ? .Pause : .Start
+        }
     }
     
     var type: Types {

@@ -9,7 +9,7 @@
 import UIKit
 import  CoreData
 
-class CollectionGroupViewController: UIViewController {
+class CollectionGroupViewController: UIViewController, UITableViewDelegate {
     
     var collectionGroup: CollectionGroup!
     
@@ -45,9 +45,24 @@ class CollectionGroupViewController: UIViewController {
             case "embed":
                 tableViewController = segue.destination as! CollectionItemFetchedRequestTableViewController
                 tableViewController.instance = currentInstance
+                tableViewController.tableView.delegate = self
             default:
                 break
             }
+        }
+    }
+    
+    // MARK: Table View Delegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = tableViewController.fetchedResultsController.moment(at: indexPath)
+        if item.isStopWatch {
+            let lastStampType: TimeStamp.Types = item.lastStamp?.type.inverse ?? .Start
+            TimeStamp(type: lastStampType, timeStamp: Date(), moment: item, in: AppDelegate.timersViewContext)
+            AppDelegate.sharedInstance.timersController.saveContext()
+        } else {
+            TimeStamp(type: .Start, timeStamp: Date(), moment: item, in: AppDelegate.timersViewContext)
+            AppDelegate.sharedInstance.timersController.saveContext()
         }
     }
     
@@ -154,22 +169,38 @@ class CollectionItemFetchedRequestTableViewController: FetchedResultsTableViewCo
         }
     }
     
+    private var refreshTimer: UIKit.Timer?
+    
     // MARK: - RETURN VALUES
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Items"
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = fetchedResultsController.moment(at: indexPath)
         if row.isStopWatch {
             let cell = tableView.dequeueReusableCell(withIdentifier: "stop watch", for: indexPath)
+            let stopWatch = row as! StopWatch
             
             cell.textLabel!.text = row.title
-            cell.detailTextLabel!.text = "I am a Stop Watch"
+            if let sum = stopWatch.continuousSum {
+                cell.detailTextLabel!.text = "Sum: \(String(sum))"
+            } else {
+                cell.detailTextLabel!.text = "Sum: 0m"
+            }
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "moment", for: indexPath)
+            let moment = row as Moment
             
             cell.textLabel!.text = row.title
-            cell.detailTextLabel!.text = "I am a Moment"
+            if let timeStamp = moment.lastStamp {
+                cell.detailTextLabel!.text = "Last time stamp: \(String(timeStamp.stamp!, dateStyle: .medium, timeStyle: .medium))"
+            } else {
+                cell.detailTextLabel!.text = "No recoreded time stamps"
+            }
             
             return cell
         }
@@ -214,6 +245,22 @@ class CollectionItemFetchedRequestTableViewController: FetchedResultsTableViewCo
         super.viewDidLoad()
         
         saveHandler = AppDelegate.sharedInstance.timersController.saveContext
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        refreshTimer = UIKit.Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
+            if self?.tableView.isEditing == false {
+                self?.tableView.reloadData() // TODO : May break during iCloud Sync
+            }
+        })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        refreshTimer?.invalidate()
     }
 
 }

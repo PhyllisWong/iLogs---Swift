@@ -20,7 +20,28 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         
         let directory = fetchedResultsController.directory(at: indexPath)
         cell.textLabel!.text = directory.info!.title
-        cell.detailTextLabel!.text = String(directory)
+        cell.accessoryType = .none
+        switch directory.info! {
+        case is StopWatch:
+            let stopWatch = directory.stopWatch
+            if let sum = stopWatch.sum {
+                cell.detailTextLabel!.text = "Sum: \(String(sum))"
+            } else {
+                cell.detailTextLabel!.text = "Sum: 0m"
+            }
+        case is Moment:
+            let moment = directory.moment
+            if let timeStamp = moment.lastStamp {
+                cell.detailTextLabel!.text = "Last time stamp: \(String(timeStamp.stamp!, dateStyle: .medium, timeStyle: .medium))"
+            } else {
+                cell.detailTextLabel!.text = "No recoreded time stamps"
+            }
+        case is CollectionGroup, is Folder:
+            cell.accessoryType = .disclosureIndicator
+            cell.detailTextLabel!.text = nil
+        default:
+            break
+        }
         
         return cell
     }
