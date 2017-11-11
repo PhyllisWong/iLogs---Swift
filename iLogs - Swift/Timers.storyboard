@@ -84,7 +84,7 @@
             <objects>
                 <tableViewController id="rqa-qi-rpz" customClass="TimerFetchedRequestTableViewController" customModule="iLogs___Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0BJ-rr-hnD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="331"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -297,11 +297,11 @@
                         <viewControllerLayoutGuide type="bottom" id="cw8-Ov-QHQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="69Q-uG-YF8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="471"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2RF-9h-zm6">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="471"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ByF-vl-YLd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -404,9 +404,9 @@
                                         </constraints>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Meb-BW-8CY">
-                                        <rect key="frame" x="0.0" y="272" width="375" height="199"/>
+                                        <rect key="frame" x="0.0" y="272" width="375" height="331"/>
                                         <connections>
-                                            <segue destination="rqa-qi-rpz" kind="embed" identifier="dates table" id="esk-1M-e2X"/>
+                                            <segue destination="rqa-qi-rpz" kind="embed" identifier="embed" id="esk-1M-e2X"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -649,6 +649,6 @@
         <image name="patt_arrow-2" width="9" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Q3Y-1C-SyR"/>
+        <segue reference="LhP-ma-lf1"/>
     </inferredMetricsTieBreakers>
 </document>

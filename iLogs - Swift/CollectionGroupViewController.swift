@@ -189,6 +189,11 @@ class CollectionItemFetchedRequestTableViewController: FetchedResultsTableViewCo
             } else {
                 cell.detailTextLabel!.text = "Sum: 0m"
             }
+            if stopWatch.isPaused ?? false {
+                cell.detailTextLabel!.textColor = UIColor.black
+            } else {
+                cell.detailTextLabel!.textColor = UIColor.blue
+            }
             
             return cell
         } else {
