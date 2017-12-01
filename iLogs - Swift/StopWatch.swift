@@ -11,7 +11,7 @@ import CoreData
 
 extension StopWatch {
     
-    /** aux to allow not set on Int16 */
+    /// aux to allow not set on Int16
     var timeLimit: TimeInterval? {
         set {
             timeLimitValue = newValue != nil ? Int16(newValue!) : Int16(0)

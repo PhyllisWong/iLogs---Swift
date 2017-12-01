@@ -57,7 +57,7 @@ class MomentViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     private func updateUI() {
         if let stopWatch = moment as? StopWatch {
             if let _ = stopWatch.timeLimit {
-                buttonTimeLimit.setTitle(String(stopWatch.timeLimit!), for: .normal)
+                buttonTimeLimit.setTitle(String(timeInterval: stopWatch.timeLimit!), for: .normal)
                 stepperTimeLimit.value = Double(stopWatch.timeLimit ?? 0)
             } else {
                 buttonTimeLimit.setTitle("Not Set", for: .normal)
@@ -348,18 +348,18 @@ extension CustomTableViewCell {
     
     /** set the cell's view based on what is available; @IBOutlet labels that are not nil */
     fileprivate func config(timeStamp: Date, forExtendedCell adjacentTimeStamp: Date? = nil) {
-        self.labelTitle?.text = String(timeStamp, dateStyle: .full, timeStyle: .medium)
-        self.labelSubtitle?.text = "\(String(timeStamp.timeIntervalSinceNow)) ago"
+        self.labelTitle?.text = String(date: timeStamp, dateStyle: .full, timeStyle: .medium)
+        self.labelSubtitle?.text = "\(String(timeInterval: timeStamp.timeIntervalSinceNow)) ago"
         if adjacentTimeStamp != nil {
             let interval = timeStamp.timeIntervalSince(adjacentTimeStamp!)
-            self.labelCaption?.text = String(interval)
+            self.labelCaption?.text = String(timeInterval: interval)
         }
     }
     
     /** set the cell's view based on what is available; @IBOutlet labels that are not nil */
     fileprivate func config(lowerStamp: TimeStamp, higherStamp: TimeStamp?) {
-        self.labelTitle.text = String(lowerStamp.stamp!, dateStyle: .full)
-        self.labelCaption.text = String(lowerStamp.stamp!, dateStyle: .none, timeStyle: .medium)
+        self.labelTitle.text = String(date: lowerStamp.stamp!, dateStyle: .full)
+        self.labelCaption.text = String(date: lowerStamp.stamp!, dateStyle: .none, timeStyle: .medium)
         if let upperStamp = higherStamp {
             let trailingDay: String? // If the two stamps are different days, print the day for the upper stamp
             let calendar = Calendar.current
@@ -372,19 +372,19 @@ extension CustomTableViewCell {
             } else {
                 if lowerDay.weekOfYear! != upperDay.weekOfYear! {
                     // show month, day and year
-                    trailingDay = String(upperStamp.stamp!, dateStyle: .medium)
+                    trailingDay = String(date: upperStamp.stamp!, dateStyle: .medium)
                 } else {
                     // show only weekday
                     trailingDay = upperDay.weekdayTitle!
                 }
             }
-            self.labelCaption2.text = String(upperStamp.stamp!, dateStyle: .none, timeStyle: .medium) + (trailingDay != nil ? "\n\(trailingDay!)" : "")
+            self.labelCaption2.text = String(date: upperStamp.stamp!, dateStyle: .none, timeStyle: .medium) + (trailingDay != nil ? "\n\(trailingDay!)" : "")
             let variance = upperStamp.stamp!.timeIntervalSince(lowerStamp.stamp! as Date)
-            self.labelSubtitle.text = String(variance)
+            self.labelSubtitle.text = String(timeInterval: variance)
         } else {
             self.labelCaption2.text = "now"
             let variance = Date().timeIntervalSince(lowerStamp.stamp! as Date)
-            self.labelSubtitle.text = String(variance)
+            self.labelSubtitle.text = String(timeInterval: variance)
         }
     }
 }

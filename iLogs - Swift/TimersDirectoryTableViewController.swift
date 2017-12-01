@@ -25,14 +25,14 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         case is StopWatch:
             let stopWatch = directory.stopWatch
             if let sum = stopWatch.sum {
-                cell.detailTextLabel!.text = "Sum: \(String(sum))"
+                cell.detailTextLabel!.text = "Sum: \(String(timeInterval: sum))"
             } else {
                 cell.detailTextLabel!.text = "Sum: 0m"
             }
         case is Moment:
             let moment = directory.moment
             if let timeStamp = moment.lastStamp {
-                cell.detailTextLabel!.text = "Last time stamp: \(String(timeStamp.stamp!, dateStyle: .medium, timeStyle: .medium))"
+                cell.detailTextLabel!.text = "Last time stamp: \(String(date: timeStamp.stamp!, dateStyle: .medium, timeStyle: .medium))"
             } else {
                 cell.detailTextLabel!.text = "No recoreded time stamps"
             }
@@ -112,7 +112,7 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         func addAction(actionTitle: String, alertTitle: String, alertMessage: String, complitionHandler handler: @escaping (String) -> Void) {
             alertAdd.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { [weak self] (action) in
                 let alertTitle = UITextAlertController(title: alertTitle, message: alertMessage)
-                alertTitle.addConfirmAction(action: UIAlertAction(title: "Add", style: .default, handler: { (action) in
+                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
                     let title = alertTitle.inputField.text!
                     handler(title)
                     AppDelegate.sharedInstance.timersController.saveContext()

@@ -19,7 +19,6 @@
 		E9854B1B1F9AC5B60030B533 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9854B1A1F9AC5B60030B533 /* TextView.swift */; };
 		E99CDC021F9D2C4C00BE2018 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */; };
 		E9A225DE1FA6C688002A7575 /* Moment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A225DD1FA6C688002A7575 /* Moment.swift */; };
-		E9A225E01FA6C911002A7575 /* UniversalSubclasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A225DF1FA6C911002A7575 /* UniversalSubclasses.swift */; };
 		E9A225E21FA6D1E5002A7575 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A225E11FA6D1E5002A7575 /* Folder.swift */; };
 		E9AA69961F7756ED007F07FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA69951F7756ED007F07FB /* AppDelegate.swift */; };
 		E9AA699B1F7756ED007F07FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AA69991F7756ED007F07FB /* Main.storyboard */; };
@@ -67,7 +66,6 @@
 		E9854B1A1F9AC5B60030B533 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		E9A225DD1FA6C688002A7575 /* Moment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moment.swift; sourceTree = "<group>"; };
-		E9A225DF1FA6C911002A7575 /* UniversalSubclasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UniversalSubclasses.swift; path = "../../../../Swift Source Files/UniversalSubclasses.swift"; sourceTree = "<group>"; };
 		E9A225E11FA6D1E5002A7575 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		E9AA69921F7756ED007F07FB /* iLogs - Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iLogs - Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9AA69951F7756ED007F07FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 			children = (
 				E9AA69951F7756ED007F07FB /* AppDelegate.swift */,
 				E9854B181F969B780030B533 /* UniversalExtentions.swift */,
-				E9A225DF1FA6C911002A7575 /* UniversalSubclasses.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -370,7 +367,6 @@
 				E9080D801F968D3400F8EEA6 /* MomentViewController.swift in Sources */,
 				E9080D821F9690A300F8EEA6 /* FetchedResultsTableViewController.swift in Sources */,
 				E9854B1B1F9AC5B60030B533 /* TextView.swift in Sources */,
-				E9A225E01FA6C911002A7575 /* UniversalSubclasses.swift in Sources */,
 				E9AA6A131F7769CE007F07FB /* Diary.xcdatamodeld in Sources */,
 				E963AFF21F78A4010008EDEA /* Directory.swift in Sources */,
 				E9365AA41FAC0E50004BE58D /* TimersController.swift in Sources */,
@@ -540,7 +536,7 @@
 		E9AA69BE1F7756ED007F07FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = "iLogs - Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -553,7 +549,7 @@
 		E9AA69BF1F7756ED007F07FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				DEVELOPMENT_TEAM = 8U3L6K9JA6;
 				INFOPLIST_FILE = "iLogs - Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

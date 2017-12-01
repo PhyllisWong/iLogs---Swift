@@ -70,17 +70,37 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var buttonAdd: UIBarButtonItem!
     @IBAction func pressAdd(_ sender: Any) {
+        func rename(_ object: Moment, complition: @escaping () -> Void) {
+            let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+            alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
+                let title = alertTitle.inputField.text!
+                object.title = title
+                complition()
+            }))
+            self.present(alertTitle, animated: true)
+        }
+        
         let alertNewMoment = UIAlertController(title: "Add New", message: nil, preferredStyle: .actionSheet)
         alertNewMoment.addActions(
             actions: UIAlertActionInfo(title: "Moment", handler: { [weak self] (action) in
-                let moment = Moment(title: "Untitled", parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
-                moment.collection = self!.currentInstance!
-                AppDelegate.sharedInstance.timersController.saveContext()
+                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
+                    let title = alertTitle.inputField.text!
+                    let moment = Moment(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
+                    moment.collection = self!.currentInstance!
+                    AppDelegate.sharedInstance.timersController.saveContext()
+                }))
+                self!.present(alertTitle, animated: true)
             }),
             UIAlertActionInfo(title: "Stop Watch", handler: { [weak self] (action) in
-                let stopWatch = StopWatch(title: "Untitled", parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
-                stopWatch.collection = self!.currentInstance!
-                AppDelegate.sharedInstance.timersController.saveContext()
+                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
+                    let title = alertTitle.inputField.text!
+                    let stopWatch = StopWatch(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
+                    stopWatch.collection = self!.currentInstance!
+                    AppDelegate.sharedInstance.timersController.saveContext()
+                }))
+                self!.present(alertTitle, animated: true)
             })
         )
         self.present(alertNewMoment, animated: true)
@@ -184,15 +204,16 @@ class CollectionItemFetchedRequestTableViewController: FetchedResultsTableViewCo
             let stopWatch = row as! StopWatch
             
             cell.textLabel!.text = row.title
-            if let sum = stopWatch.continuousSum {
-                cell.detailTextLabel!.text = "Sum: \(String(sum))"
-            } else {
-                cell.detailTextLabel!.text = "Sum: 0m"
-            }
-            if stopWatch.isPaused ?? false {
+            if stopWatch.isPaused ?? true { //no timer is counting or empty list of timers
                 cell.detailTextLabel!.textColor = UIColor.black
             } else {
                 cell.detailTextLabel!.textColor = UIColor.blue
+            }
+            if let sum = stopWatch.continuousSum {
+                cell.detailTextLabel!.text = "Sum: \(String(timeInterval: sum))"
+            } else {
+                cell.detailTextLabel!.text = "No recorded time stamps"
+                cell.detailTextLabel!.textColor = UIColor.darkText
             }
             
             return cell
@@ -202,9 +223,11 @@ class CollectionItemFetchedRequestTableViewController: FetchedResultsTableViewCo
             
             cell.textLabel!.text = row.title
             if let timeStamp = moment.lastStamp {
-                cell.detailTextLabel!.text = "Last time stamp: \(String(timeStamp.stamp!, dateStyle: .medium, timeStyle: .medium))"
+                cell.detailTextLabel!.text = "Last time stamp: \(String(date: timeStamp.stamp!, dateStyle: .medium, timeStyle: .medium))"
+                cell.detailTextLabel!.textColor = UIColor.black
             } else {
                 cell.detailTextLabel!.text = "No recoreded time stamps"
+                cell.detailTextLabel!.textColor = UIColor.darkText
             }
             
             return cell
