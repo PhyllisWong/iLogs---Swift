@@ -10,13 +10,18 @@
 		E9080D7E1F968C8C00F8EEA6 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9080D7D1F968C8C00F8EEA6 /* CustomTableViewCell.swift */; };
 		E9080D801F968D3400F8EEA6 /* MomentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9080D7F1F968D3400F8EEA6 /* MomentViewController.swift */; };
 		E9080D821F9690A300F8EEA6 /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9080D811F9690A300F8EEA6 /* FetchedResultsTableViewController.swift */; };
+		E91E92601FD35C2300C17462 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFEF1F78A09E0008EDEA /* StopWatch.swift */; };
+		E91E92611FD35C3800C17462 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFF11F78A4010008EDEA /* Directory.swift */; };
+		E91E92621FD35DCA00C17462 /* TimersDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFED1F789EB80008EDEA /* TimersDirectoryTableViewController.swift */; };
 		E9365AA41FAC0E50004BE58D /* TimersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9365AA31FAC0E4F004BE58D /* TimersController.swift */; };
+		E938CC8B1F8857F800408742 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938CC8A1F8857F800408742 /* CustomCollectionViewCell.swift */; };
+		E938CC8D1F8858F300408742 /* EntryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938CC8C1F8858F300408742 /* EntryCollectionViewController.swift */; };
 		E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E963AFE71F789A760008EDEA /* Timers.xcdatamodeld */; };
-		E963AFEE1F789EB80008EDEA /* TimersDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFED1F789EB80008EDEA /* TimersDirectoryTableViewController.swift */; };
-		E963AFF01F78A09E0008EDEA /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFEF1F78A09E0008EDEA /* StopWatch.swift */; };
-		E963AFF21F78A4010008EDEA /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963AFF11F78A4010008EDEA /* Directory.swift */; };
+		E97458451FD3546600707138 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97458441FD3546600707138 /* Diary.swift */; };
+		E97458461FD3583A00707138 /* Diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */; };
 		E9854B191F969B780030B533 /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9854B181F969B780030B533 /* UniversalExtentions.swift */; };
 		E9854B1B1F9AC5B60030B533 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9854B1A1F9AC5B60030B533 /* TextView.swift */; };
+		E98E9EDA1F84356800B684D9 /* ModularTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E9ED91F84356800B684D9 /* ModularTableViewController.swift */; };
 		E99CDC021F9D2C4C00BE2018 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */; };
 		E9A225DE1FA6C688002A7575 /* Moment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A225DD1FA6C688002A7575 /* Moment.swift */; };
 		E9A225E21FA6D1E5002A7575 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A225E11FA6D1E5002A7575 /* Folder.swift */; };
@@ -28,12 +33,14 @@
 		E9AA69B91F7756ED007F07FB /* iLogs___SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA69B81F7756ED007F07FB /* iLogs___SwiftUITests.swift */; };
 		E9AA69C81F7758F5007F07FB /* Diary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AA69C61F7758F5007F07FB /* Diary.storyboard */; };
 		E9AA6A0A1F77614B007F07FB /* DiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A091F77614B007F07FB /* DiaryController.swift */; };
-		E9AA6A0C1F77625D007F07FB /* TodaysDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A0B1F77625D007F07FB /* TodaysDiaryTableViewController.swift */; };
-		E9AA6A101F776468007F07FB /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A0F1F776468007F07FB /* Diary.swift */; };
-		E9AA6A131F7769CE007F07FB /* Diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */; };
+		E9BEB7261F7B69F100C0FDA4 /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BEB7251F7B69F100C0FDA4 /* EntryViewController.swift */; };
+		E9BEB7281F7DCD8200C0FDA4 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BEB7271F7DCD8200C0FDA4 /* Entry.swift */; };
+		E9BEB72A1F7DD78E00C0FDA4 /* EntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BEB7291F7DD78E00C0FDA4 /* EntryDetailViewController.swift */; };
 		E9C9A1C41F78AE1900AE55D8 /* Timers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9C9A1C31F78AE1900AE55D8 /* Timers.storyboard */; };
+		E9C9A1CB1F7AE2B000AE55D8 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C9A1CA1F7AE2B000AE55D8 /* DiaryTableViewController.swift */; };
 		E9E49B881FB015850034455F /* CollectionGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E49B871FB015850034455F /* CollectionGroupViewController.swift */; };
 		E9E49B8A1FB018410034455F /* CollectionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E49B891FB018410034455F /* CollectionGroup.swift */; };
+		E9F2DF651F88B62400A4B7E4 /* Entry+Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F2DF641F88B62400A4B7E4 /* Entry+Meta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,12 +65,18 @@
 		E9080D7F1F968D3400F8EEA6 /* MomentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentViewController.swift; sourceTree = "<group>"; };
 		E9080D811F9690A300F8EEA6 /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchedResultsTableViewController.swift; path = "../../../../Swift Source Files/FetchedResultsTableViewController.swift"; sourceTree = "<group>"; };
 		E9365AA31FAC0E4F004BE58D /* TimersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersController.swift; sourceTree = "<group>"; };
+		E938CC8A1F8857F800408742 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		E938CC8C1F8858F300408742 /* EntryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCollectionViewController.swift; sourceTree = "<group>"; };
 		E963AFE81F789A760008EDEA /* Timers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Timers.xcdatamodel; sourceTree = "<group>"; };
 		E963AFED1F789EB80008EDEA /* TimersDirectoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimersDirectoryTableViewController.swift; sourceTree = "<group>"; };
 		E963AFEF1F78A09E0008EDEA /* StopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		E963AFF11F78A4010008EDEA /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
+		E97458441FD3546600707138 /* Diary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		E9854B181F969B780030B533 /* UniversalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
 		E9854B1A1F9AC5B60030B533 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		E98E9ED41F84302400B684D9 /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchedResultsTableViewController.swift; path = "../../../../Swift Source Files/FetchedResultsTableViewController.swift"; sourceTree = "<group>"; };
+		E98E9ED61F84302800B684D9 /* UniversalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
+		E98E9ED91F84356800B684D9 /* ModularTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularTableViewController.swift; sourceTree = "<group>"; };
 		E99CDC011F9D2C4C00BE2018 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		E9A225DD1FA6C688002A7575 /* Moment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moment.swift; sourceTree = "<group>"; };
 		E9A225E11FA6D1E5002A7575 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
@@ -84,9 +97,15 @@
 		E9AA6A0B1F77625D007F07FB /* TodaysDiaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysDiaryTableViewController.swift; sourceTree = "<group>"; };
 		E9AA6A0F1F776468007F07FB /* Diary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		E9AA6A121F7769CE007F07FB /* Diary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Diary.xcdatamodel; sourceTree = "<group>"; };
+		E9BEB7251F7B69F100C0FDA4 /* EntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		E9BEB7271F7DCD8200C0FDA4 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		E9BEB7291F7DD78E00C0FDA4 /* EntryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryDetailViewController.swift; sourceTree = "<group>"; };
 		E9C9A1C31F78AE1900AE55D8 /* Timers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Timers.storyboard; sourceTree = "<group>"; };
+		E9C9A1C51F7ADE0500AE55D8 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		E9C9A1CA1F7AE2B000AE55D8 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
 		E9E49B871FB015850034455F /* CollectionGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionGroupViewController.swift; sourceTree = "<group>"; };
 		E9E49B891FB018410034455F /* CollectionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionGroup.swift; sourceTree = "<group>"; };
+		E9F2DF641F88B62400A4B7E4 /* Entry+Meta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entry+Meta.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +151,24 @@
 			name = Timers;
 			sourceTree = "<group>";
 		};
+		E97458431FD33F9000707138 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				E9AA6A0F1F776468007F07FB /* Diary.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		E98E9ED81F84354D00B684D9 /* UICustom */ = {
+			isa = PBXGroup;
+			children = (
+				E9C9A1C51F7ADE0500AE55D8 /* CustomTableViewCell.swift */,
+				E938CC8A1F8857F800408742 /* CustomCollectionViewCell.swift */,
+				E98E9ED91F84356800B684D9 /* ModularTableViewController.swift */,
+			);
+			name = UICustom;
+			sourceTree = "<group>";
+		};
 		E9AA69891F7756ED007F07FB = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +176,7 @@
 				E9AA69AC1F7756ED007F07FB /* iLogs - SwiftTests */,
 				E9AA69B71F7756ED007F07FB /* iLogs - SwiftUITests */,
 				E9AA69931F7756ED007F07FB /* Products */,
+				E97458431FD33F9000707138 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,6 +226,7 @@
 			children = (
 				E9AA69951F7756ED007F07FB /* AppDelegate.swift */,
 				E9854B181F969B780030B533 /* UniversalExtentions.swift */,
+				E98E9ED61F84302800B684D9 /* UniversalExtentions.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -198,6 +237,8 @@
 				E9080D811F9690A300F8EEA6 /* FetchedResultsTableViewController.swift */,
 				E9080D7D1F968C8C00F8EEA6 /* CustomTableViewCell.swift */,
 				E9854B1A1F9AC5B60030B533 /* TextView.swift */,
+				E98E9ED41F84302400B684D9 /* FetchedResultsTableViewController.swift */,
+				E98E9ED81F84354D00B684D9 /* UICustom */,
 				E9AA699F1F7756ED007F07FB /* Assets.xcassets */,
 				E9AA69A11F7756ED007F07FB /* LaunchScreen.storyboard */,
 				E9AA69A41F7756ED007F07FB /* Info.plist */,
@@ -209,12 +250,26 @@
 			isa = PBXGroup;
 			children = (
 				E9AA6A091F77614B007F07FB /* DiaryController.swift */,
-				E9AA6A0B1F77625D007F07FB /* TodaysDiaryTableViewController.swift */,
+				E9C9A1C71F7AE23F00AE55D8 /* Today's */,
 				E9AA69C61F7758F5007F07FB /* Diary.storyboard */,
 				E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */,
-				E9AA6A0F1F776468007F07FB /* Diary.swift */,
+				E97458441FD3546600707138 /* Diary.swift */,
+				E9BEB7271F7DCD8200C0FDA4 /* Entry.swift */,
+				E9F2DF641F88B62400A4B7E4 /* Entry+Meta.swift */,
 			);
 			name = Diary;
+			sourceTree = "<group>";
+		};
+		E9C9A1C71F7AE23F00AE55D8 /* Today's */ = {
+			isa = PBXGroup;
+			children = (
+				E9AA6A0B1F77625D007F07FB /* TodaysDiaryTableViewController.swift */,
+				E9C9A1CA1F7AE2B000AE55D8 /* DiaryTableViewController.swift */,
+				E9BEB7251F7B69F100C0FDA4 /* EntryViewController.swift */,
+				E938CC8C1F8858F300408742 /* EntryCollectionViewController.swift */,
+				E9BEB7291F7DD78E00C0FDA4 /* EntryDetailViewController.swift */,
+			);
+			name = "Today's";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,26 +411,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E91E92621FD35DCA00C17462 /* TimersDirectoryTableViewController.swift in Sources */,
+				E91E92611FD35C3800C17462 /* Directory.swift in Sources */,
+				E91E92601FD35C2300C17462 /* StopWatch.swift in Sources */,
+				E97458461FD3583A00707138 /* Diary.xcdatamodeld in Sources */,
 				E99CDC021F9D2C4C00BE2018 /* TopViewController.swift in Sources */,
 				E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */,
-				E963AFF01F78A09E0008EDEA /* StopWatch.swift in Sources */,
+				E9C9A1CB1F7AE2B000AE55D8 /* DiaryTableViewController.swift in Sources */,
+				E9BEB72A1F7DD78E00C0FDA4 /* EntryDetailViewController.swift in Sources */,
+				E9F2DF651F88B62400A4B7E4 /* Entry+Meta.swift in Sources */,
 				E9AA6A0A1F77614B007F07FB /* DiaryController.swift in Sources */,
+				E938CC8B1F8857F800408742 /* CustomCollectionViewCell.swift in Sources */,
 				E9AA69961F7756ED007F07FB /* AppDelegate.swift in Sources */,
 				E9080D7E1F968C8C00F8EEA6 /* CustomTableViewCell.swift in Sources */,
 				E9E49B881FB015850034455F /* CollectionGroupViewController.swift in Sources */,
-				E963AFEE1F789EB80008EDEA /* TimersDirectoryTableViewController.swift in Sources */,
 				E9080D801F968D3400F8EEA6 /* MomentViewController.swift in Sources */,
 				E9080D821F9690A300F8EEA6 /* FetchedResultsTableViewController.swift in Sources */,
 				E9854B1B1F9AC5B60030B533 /* TextView.swift in Sources */,
-				E9AA6A131F7769CE007F07FB /* Diary.xcdatamodeld in Sources */,
-				E963AFF21F78A4010008EDEA /* Directory.swift in Sources */,
 				E9365AA41FAC0E50004BE58D /* TimersController.swift in Sources */,
-				E9AA6A0C1F77625D007F07FB /* TodaysDiaryTableViewController.swift in Sources */,
 				E9854B191F969B780030B533 /* UniversalExtentions.swift in Sources */,
-				E9AA6A101F776468007F07FB /* Diary.swift in Sources */,
 				E9E49B8A1FB018410034455F /* CollectionGroup.swift in Sources */,
 				E9A225DE1FA6C688002A7575 /* Moment.swift in Sources */,
+				E97458451FD3546600707138 /* Diary.swift in Sources */,
 				E9A225E21FA6D1E5002A7575 /* Folder.swift in Sources */,
+				E938CC8D1F8858F300408742 /* EntryCollectionViewController.swift in Sources */,
+				E9BEB7281F7DCD8200C0FDA4 /* Entry.swift in Sources */,
+				E9BEB7261F7B69F100C0FDA4 /* EntryViewController.swift in Sources */,
+				E98E9EDA1F84356800B684D9 /* ModularTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,6 +37,9 @@ class DiaryController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        
+        container.viewContext.undoManager = UndoManager()
+        
         return container
     }()
     
@@ -53,6 +56,30 @@ class DiaryController {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    var defaultDiary: Diary {
+        get {
+            if let employer = UserDefaults.standard.string(forKey: "diary_default_diary") { //Fetches the default employer
+                if let objectId = self.persistentContainer.persistentStoreCoordinator.managedObjectID(forURIRepresentation: URL(string: employer)!) {
+                    return self.persistentContainer.viewContext.object(with: objectId) as! Diary
+                } else { //Not found, then remove the saved Id and create a new default
+                    UserDefaults.standard.setValue(nil, forKey: "diary_default_diary")
+                    
+                    return self.defaultDiary
+                }
+            } else { //Assume there is no employer saved in context and create a new one
+                let defaultEmployer = Diary(title: "Untitled Diary", in: self.persistentContainer.viewContext)
+                self.saveContext() //Save new object in store first before saving the ID into User Defaults
+                self.defaultDiary = defaultEmployer
+                
+                return self.defaultDiary
+            }
+        }
+        set {
+            UserDefaults.standard.setValue(newValue.objectID.uriRepresentation().absoluteString, forKey: "diary_default_diary")
+            UserDefaults.standard.synchronize()
         }
     }
 }

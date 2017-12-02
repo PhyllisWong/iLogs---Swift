@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="16G1036" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CollectionGroups" representedClassName="CollectionGroup" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="class">
         <relationship name="currentInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Collections" inverseName="isCurrent" inverseEntity="Collections" syncable="YES"/>
         <relationship name="instances" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Collections" inverseName="collectionGroup" inverseEntity="Collections" syncable="YES"/>
