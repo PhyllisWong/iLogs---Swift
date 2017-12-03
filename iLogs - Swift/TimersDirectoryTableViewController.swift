@@ -111,7 +111,7 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         
         func addAction(actionTitle: String, alertTitle: String, alertMessage: String, complitionHandler handler: @escaping (String) -> Void) {
             alertAdd.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { [weak self] (action) in
-                let alertTitle = UITextAlertController(title: alertTitle, message: alertMessage)
+                let alertTitle = UITextAlertController(title: alertTitle, message: alertMessage, textFieldConfig: nil)
                 alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
                     let title = alertTitle.inputField.text!
                     handler(title)
@@ -150,5 +150,15 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         
         title = currentDirectory?.info!.title ?? "Root"
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UserDefaults.tutorialHasPresentedTapStatusBarToDimiss == false {
+            let alert = UIAlertController(title: "Returning to the Main Menu", message: "tap and hold the status bar to return to the main menu", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            self.present(alert, animated: true)
+            UserDefaults.tutorialHasPresentedTapStatusBarToDimiss = true
+        }
+    }
 }

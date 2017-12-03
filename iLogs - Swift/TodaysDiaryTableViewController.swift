@@ -76,8 +76,15 @@ class TodaysDiaryTableViewController: FetchedResultsTableViewController {
         updateUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UserDefaults.tutorialHasPresentedTapStatusBarToDimiss == false {
+            let alert = UIAlertController(title: "Returning to the Main Menu", message: "tap and hold the status bar to return to the main menu", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            self.present(alert, animated: true)
+            UserDefaults.tutorialHasPresentedTapStatusBarToDimiss = true
+        }
     }
 
 }

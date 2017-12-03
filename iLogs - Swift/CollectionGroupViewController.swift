@@ -71,7 +71,7 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var buttonAdd: UIBarButtonItem!
     @IBAction func pressAdd(_ sender: Any) {
         func rename(_ object: Moment, complition: @escaping () -> Void) {
-            let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+            let alertTitle = UITextAlertController(title: "Add", message: "enter a title", textFieldConfig: nil)
             alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
                 let title = alertTitle.inputField.text!
                 object.title = title
@@ -83,7 +83,7 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
         let alertNewMoment = UIAlertController(title: "Add New", message: nil, preferredStyle: .actionSheet)
         alertNewMoment.addActions(
             actions: UIAlertActionInfo(title: "Moment", handler: { [weak self] (action) in
-                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+                let alertTitle = UITextAlertController(title: "Add", message: "enter a title", textFieldConfig: nil)
                 alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
                     let title = alertTitle.inputField.text!
                     let moment = Moment(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
@@ -93,7 +93,7 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
                 self!.present(alertTitle, animated: true)
             }),
             UIAlertActionInfo(title: "Stop Watch", handler: { [weak self] (action) in
-                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+                let alertTitle = UITextAlertController(title: "Add", message: "enter a title", textFieldConfig: nil)
                 alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
                     let title = alertTitle.inputField.text!
                     let stopWatch = StopWatch(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
@@ -110,7 +110,7 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
         if currentInstance != nil { // There is at least one instance created
             let actionNewInstance = UIAlertController(title: "New Instance", message: nil, preferredStyle: .actionSheet)
             func insert(`for` copyType: CopyOptions<Directory>) {
-                let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title")
+                let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title", textFieldConfig: nil)
                 alertTitle.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (action) in
                     let title = alertTitle.inputField.text!
                     let newCollectionInstance = iLogs___Swift.Collection(title: title, for: self!.collectionGroup, in: AppDelegate.timersViewContext)
@@ -153,7 +153,7 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
             )
             self.present(actionNewInstance, animated: true)
         } else { // None are created thus create an empty one
-            let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title")
+            let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title", textFieldConfig: nil)
             alertTitle.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (action) in
                 let title = alertTitle.inputField.text!
                 let instance = iLogs___Swift.Collection(title: title, for: self!.collectionGroup, in: AppDelegate.timersViewContext)
