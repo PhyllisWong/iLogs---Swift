@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 extension Entry {
+    @discardableResult
     convenience init(subject: String = "", date: Date = Date(), dateCreated: Date = Date(), diary: Diary, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         
@@ -27,6 +28,7 @@ extension NSFetchedResultsController {
 }
 
 extension WeatherCondition {
+    @discardableResult
     convenience init(conditionType: WeatherCondition.Types, scaleType scale: ScaleDescriptor?, `for` entry: Entry, `in` context: NSManagedObjectContext) {
         self.init(context: context)
         

@@ -80,7 +80,8 @@ class DiaryTableViewController: FetchedResultsTableViewController, CustomTableVi
             }))
             present(alertRename, animated: true)
         } else {
-            //TODO Update visiability on which diary is showing in the filter
+            //TODO Update visiability on which diary is showing in the filter,
+            //or the checkmarked table view cells
         }
     }
     
@@ -104,7 +105,7 @@ class DiaryTableViewController: FetchedResultsTableViewController, CustomTableVi
         }
         alert.addActions(actions: UIAlertActionInfo(title: "Add", handler: { (action) in
             let diaryTitle = alert.inputField.text!
-            _ = Diary(title: diaryTitle, in: AppDelegate.diaryViewContext)
+            Diary(title: diaryTitle, in: AppDelegate.diaryViewContext)
             AppDelegate.sharedInstance.diaryController.saveContext()
         }))
         present(alert, animated: true)

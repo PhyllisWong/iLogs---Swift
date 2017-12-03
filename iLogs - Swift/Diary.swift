@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 
 extension Diary {
+    
+    @discardableResult
     convenience init(title: String, dateCreated: Date = Date(), `in` context: NSManagedObjectContext) {
         self.init(context: context)
         

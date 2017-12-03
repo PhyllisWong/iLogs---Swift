@@ -17,6 +17,7 @@
 		E938CC8B1F8857F800408742 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938CC8A1F8857F800408742 /* CustomCollectionViewCell.swift */; };
 		E938CC8D1F8858F300408742 /* EntryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E938CC8C1F8858F300408742 /* EntryCollectionViewController.swift */; };
 		E963AFE91F789A760008EDEA /* Timers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E963AFE71F789A760008EDEA /* Timers.xcdatamodeld */; };
+		E96AA4601FD3B36000BFB2D5 /* TodaysDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A0B1F77625D007F07FB /* TodaysDiaryTableViewController.swift */; };
 		E97458451FD3546600707138 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97458441FD3546600707138 /* Diary.swift */; };
 		E97458461FD3583A00707138 /* Diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9AA6A111F7769CE007F07FB /* Diary.xcdatamodeld */; };
 		E9854B191F969B780030B533 /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9854B181F969B780030B533 /* UniversalExtentions.swift */; };
@@ -411,6 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E96AA4601FD3B36000BFB2D5 /* TodaysDiaryTableViewController.swift in Sources */,
 				E91E92621FD35DCA00C17462 /* TimersDirectoryTableViewController.swift in Sources */,
 				E91E92611FD35C3800C17462 /* Directory.swift in Sources */,
 				E91E92601FD35C2300C17462 /* StopWatch.swift in Sources */,

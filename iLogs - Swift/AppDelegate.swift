@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    /**
+     By interating visibleViewControllers, selectedViewControllers, and
+     presentedViewControllers, topViewController(:) will return the current
+     view controller that is visible in the UIWindow
+     */
     class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
@@ -31,12 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return controller
     }
-
+    
     /**
      a set that contains view controllers that can be dismissed
      by a tap from the status bar
      */
-    var dismissableViewControllers = Set<UIViewController>()
+    func register(viewControllerAsDismissable viewController: UIViewController) {
+        dismissableViewControllers.insert(viewController)
+    }
+    ///stored view controllers
+    private var dismissableViewControllers = Set<UIViewController>()
     
     /** flag showing if the last touch event was inside of the status bar */
     private var touchingInsideDismisser: Bool?
@@ -90,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if touchingInsideDismisser! == true && dismissableViewControllers.contains(currentViewController) {
             NotificationCenter.default.post(name: NSNotification.Name.StatusBarDidTapAndHold, object: nil)
             currentViewController.presentingViewController!.dismiss(animated: true)
+            dismissableViewControllers.remove(currentViewController)
         }
     }
     
@@ -100,29 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
     }
 
 }
