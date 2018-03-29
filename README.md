@@ -2,10 +2,16 @@
 
 Keep track of anything! From journal entries, timers and stopwatches, to bookmarking locations on a map.
 
-## Some Achivements
+## Motivation
+
+I love to revisit what I've recored whether that be a past acquaintance with a special someone, or an illness I over came and I want to now look over the steps I did to get better because I’m now sick again. But, an average note taking app with a searching feature just isn’t enough for me. I would want to add more properties to each note like the time, my emotion, contexts (using tags and stories), photos, voice memos, location, I’d like to bookmark it if it was something important and the list goes on!
+
+So, as an user of Xcode, I began to design and built this solution for myself, and, of course, for the AppStore for others to also enjoy this note taking tool :)
+
+## Some Achievements
 
 - Create infinite directories, like folders inside folders, with a Single Entity in Core Data.
-- Mutiple persistant stores
+- Multiple persistant stores
 
 ## Future Planned Developments
 
