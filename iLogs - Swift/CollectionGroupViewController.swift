@@ -71,36 +71,62 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var buttonAdd: UIBarButtonItem!
     @IBAction func pressAdd(_ sender: Any) {
         func rename(_ object: Moment, complition: @escaping () -> Void) {
-            let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
-            alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
+            let alertTitle = UITextAlertController(title: "Add", message: "enter a title", textFieldConfig: nil)
+            alertTitle.addButton(title: "Add", with: { (action) in
                 let title = alertTitle.inputField.text!
                 object.title = title
                 complition()
-            }))
-            self.present(alertTitle, animated: true)
+            })
+            .present(in: self)
+            
+//            let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+//            alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
+//                let title = alertTitle.inputField.text!
+//                object.title = title
+//                complition()
+//            }))
+//            self.present(alertTitle, animated: true)
         }
         
         let alertNewMoment = UIAlertController(title: "Add New", message: nil, preferredStyle: .actionSheet)
         alertNewMoment.addActions(
             actions: UIAlertActionInfo(title: "Moment", handler: { [weak self] (action) in
-                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
-                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
+                let alertTitle = UITextAlertController(title: "Add", message: "enter a title", textFieldConfig: nil)
+                alertTitle.addButton(title: "Add", with: { [weak self] (action) in
                     let title = alertTitle.inputField.text!
                     let moment = Moment(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
                     moment.collection = self!.currentInstance!
                     AppDelegate.sharedInstance.timersController.saveContext()
-                }))
-                self!.present(alertTitle, animated: true)
+                })
+                .present(in: self!)
+                
+//                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+//                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
+//                    let title = alertTitle.inputField.text!
+//                    let moment = Moment(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
+//                    moment.collection = self!.currentInstance!
+//                    AppDelegate.sharedInstance.timersController.saveContext()
+//                }))
+//                self!.present(alertTitle, animated: true)
             }),
             UIAlertActionInfo(title: "Stop Watch", handler: { [weak self] (action) in
-                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
-                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
+                let alertTitle = UITextAlertController(title: "Add", message: "enter a title", textFieldConfig: nil)
+                alertTitle.addButton(title: "Add", with: { [weak self] (action) in
                     let title = alertTitle.inputField.text!
                     let stopWatch = StopWatch(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
                     stopWatch.collection = self!.currentInstance!
                     AppDelegate.sharedInstance.timersController.saveContext()
-                }))
-                self!.present(alertTitle, animated: true)
+                })
+                .present(in: self!)
+                
+//                let alertTitle = UITextAlertController(title: "Add", message: "enter a title")
+//                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { [weak self] (action) in
+//                    let title = alertTitle.inputField.text!
+//                    let stopWatch = StopWatch(title: title, parent: self!.collectionGroup.directory, in: AppDelegate.timersViewContext)
+//                    stopWatch.collection = self!.currentInstance!
+//                    AppDelegate.sharedInstance.timersController.saveContext()
+//                }))
+//                self!.present(alertTitle, animated: true)
             })
         )
         self.present(alertNewMoment, animated: true)
@@ -110,8 +136,8 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
         if currentInstance != nil { // There is at least one instance created
             let actionNewInstance = UIAlertController(title: "New Instance", message: nil, preferredStyle: .actionSheet)
             func insert(`for` copyType: CopyOptions<Directory>) {
-                let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title")
-                alertTitle.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (action) in
+                let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title", textFieldConfig: nil)
+                alertTitle.addButton(title: "Add", with: { [weak self] (action) in
                     let title = alertTitle.inputField.text!
                     let newCollectionInstance = iLogs___Swift.Collection(title: title, for: self!.collectionGroup, in: AppDelegate.timersViewContext)
                     
@@ -135,9 +161,40 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
                     self!.collectionGroup.currentInstance = newCollectionInstance
                     AppDelegate.sharedInstance.timersController.saveContext()
                     self!.updateUI()
-                }))
-                alertTitle.addDismissAction()
-                self.present(alertTitle, animated: true)
+                })
+                .addCancelButton()
+                .present(in: self)
+                
+                
+                
+//                let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title")
+//                alertTitle.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (action) in
+//                    let title = alertTitle.inputField.text!
+//                    let newCollectionInstance = iLogs___Swift.Collection(title: title, for: self!.collectionGroup, in: AppDelegate.timersViewContext)
+//
+//                    //Create deep copies but with default attributes such as the date created
+//                    switch copyType {
+//                    case .All:
+//                        for item in self!.currentInstance!.items! as! Set<Moment> {
+//                            let copiedItem: Moment
+//                            if item.isStopWatch {
+//                                copiedItem = StopWatch(blankCopy: item, in: AppDelegate.timersViewContext)
+//                            } else {
+//                                copiedItem = Moment(blankCopy: item, in: AppDelegate.timersViewContext)
+//                            }
+//                            copiedItem.collection = newCollectionInstance
+//                        }
+//                    case .Some(let selectedItems):
+//                        break
+//                    case .None:
+//                        break
+//                    }
+//                    self!.collectionGroup.currentInstance = newCollectionInstance
+//                    AppDelegate.sharedInstance.timersController.saveContext()
+//                    self!.updateUI()
+//                }))
+//                alertTitle.addDismissAction()
+//                self.present(alertTitle, animated: true)
             }
             actionNewInstance.addActions(
                 actions:
@@ -153,16 +210,27 @@ class CollectionGroupViewController: UIViewController, UITableViewDelegate {
             )
             self.present(actionNewInstance, animated: true)
         } else { // None are created thus create an empty one
-            let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title")
-            alertTitle.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (action) in
+            let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title", textFieldConfig: nil)
+            alertTitle.addButton(title: "Add", with: { [weak self] (action) in
                 let title = alertTitle.inputField.text!
                 let instance = iLogs___Swift.Collection(title: title, for: self!.collectionGroup, in: AppDelegate.timersViewContext)
                 self!.collectionGroup.currentInstance = instance
                 AppDelegate.sharedInstance.timersController.saveContext()
                 self!.updateUI()
-            }))
-            alertTitle.addDismissAction()
-            self.present(alertTitle, animated: true)
+            })
+            .addCancelButton()
+            .present(in: self)
+            
+//            let alertTitle = UITextAlertController(title: "New Instance", message: "enter a title")
+//            alertTitle.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (action) in
+//                let title = alertTitle.inputField.text!
+//                let instance = iLogs___Swift.Collection(title: title, for: self!.collectionGroup, in: AppDelegate.timersViewContext)
+//                self!.collectionGroup.currentInstance = instance
+//                AppDelegate.sharedInstance.timersController.saveContext()
+//                self!.updateUI()
+//            }))
+//            alertTitle.addDismissAction()
+//            self.present(alertTitle, animated: true)
         }
     }
     

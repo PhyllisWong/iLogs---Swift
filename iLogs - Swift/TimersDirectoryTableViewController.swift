@@ -111,13 +111,22 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         
         func addAction(actionTitle: String, alertTitle: String, alertMessage: String, complitionHandler handler: @escaping (String) -> Void) {
             alertAdd.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { [weak self] (action) in
-                let alertTitle = UITextAlertController(title: alertTitle, message: alertMessage)
-                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
+                guard let unwrappedSelf = self else { return }
+                
+                let alertTitle = UITextAlertController(title: "Add", message: alertMessage, textFieldConfig: nil)
+                alertTitle.addButton(title: "Add", with: { (action) in
                     let title = alertTitle.inputField.text!
                     handler(title)
                     AppDelegate.sharedInstance.timersController.saveContext()
-                }))
-                self?.present(alertTitle, animated: true)
+                })
+                .present(in: unwrappedSelf)
+                
+//                alertTitle.addConfirmAction(action: UIAlertActionInfo(title: "Add", handler: { (action) in
+//                    let title = alertTitle.inputField.text!
+//                    handler(title)
+//                    AppDelegate.sharedInstance.timersController.saveContext()
+//                }))
+//                self?.present(alertTitle, animated: true)
             }))
         }
         
@@ -133,8 +142,8 @@ class TimersDirectoryTableViewController: FetchedResultsTableViewController {
         addAction(actionTitle: "Stop Watch", alertTitle: "Add a Stop Watch", alertMessage: "enter a title", complitionHandler: { [weak self] title in
             StopWatch(title: title, parent: self?.currentDirectory, in: AppDelegate.timersViewContext)
         })
-        alertAdd.addDismissAction()
-        self.present(alertAdd, animated: true)
+        alertAdd.addCancelButton()
+        .present(in: self)
     }
     
     // MARK: - LIFE CYCLE

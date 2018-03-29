@@ -141,8 +141,9 @@ class MomentViewController: UIViewController, UITextFieldDelegate, UITextViewDel
                 self?.updateUI()
             }))
         }
-        alertTimeLimit.addDismissAction()
-        self.present(alertTimeLimit, animated: true)
+        alertTimeLimit
+            .addCancelButton()
+            .present(in: self)
     }
     
     @IBAction private func dismissKeyboard(_ sender: Any) {

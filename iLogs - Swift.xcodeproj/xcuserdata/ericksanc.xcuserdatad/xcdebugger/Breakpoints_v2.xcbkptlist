@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "iLogs - Swift/MomentViewController.swift"
-            timestampString = "532924726.774199"
+            timestampString = "544048586.997907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "controllerWillChangeContent(_:)"
             landmarkType = "7">
             <Actions>
